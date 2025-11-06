@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /thanks
+Disallow: /form-error
+Disallow: /form-success
+
+Sitemap: https://snorkelingaventure.vercel.app/sitemap-index.xml

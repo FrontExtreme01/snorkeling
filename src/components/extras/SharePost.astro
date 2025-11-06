@@ -1,0 +1,73 @@
+---
+import { Facebook, WhatsApp, BranX, Linkedin, LinkShared } from "@/icons/allIcons";
+
+const { siteURL, textCopy } = Astro.props;
+---
+
+<div class="order-1 lg:order-none w-full lg:w-1/12 lg:pl-10 my-5 lg:my-0">
+    <div class="sticky top-40 flex flex-wrap lg:flex-nowrap lg:flex-col items-center justify-center lg:space-y-2 space-x-2 lg:space-x-0">
+    <span class="txt-copied scale-0 transform duration-200 absolute -top-12 left-1/2 -translate-x-1/2 w-fit px-4 md:px-6 py-2 text-white font-semibold bg-cyan-600 rounded-full text-xs text-center">
+        {textCopy}
+    </span>
+    <button
+        id="copy-link"
+        class="grid place-items-center bg-gray-200 size-10 md:size-12 rounded-full hover:bg-gray-300 transition duration-300 hover:scale-90 cursor-pointer"
+        aria-label="Copy post link to clipboard"
+    >
+        <LinkShared class="size-5" />
+    </button>
+    <a
+        href={`https://www.facebook.com/sharer/sharer.php?u=${siteURL}`}
+        target="_blank"
+        aria-label="Share post on Facebook"
+        rel="noopener noreferrer"
+        class="grid place-items-center bg-blue-600 text-white size-10 md:size-12 rounded-full hover:bg-blue-700 transition duration-300 hover:scale-90"
+    >
+        <Facebook class="size-5" />
+    </a>
+    <a
+        href={`https://twitter.com/intent/tweet?url=${siteURL}`}
+        target="_blank"
+        aria-label="Share post on social media X"
+        rel="noopener noreferrer"
+        class="grid place-items-center bg-gray-900 text-white size-10 md:size-12 rounded-full hover:bg-gray-800 transition duration-300 hover:scale-90"
+    >
+        <BranX class="size-5" />
+    </a>
+    <a
+        href={`https://api.whatsapp.com/send?text=${siteURL}`}
+        target="_blank"
+        aria-label="Share post on WhatsApp"
+        rel="noopener noreferrer"
+        class="grid place-items-center bg-green-500 text-white size-10 md:size-12 rounded-full hover:bg-green-600 transition duration-300 hover:scale-90"
+    >
+        <WhatsApp class="size-5" />
+    </a>
+    <a
+        href={`https://www.linkedin.com/shareArticle?mini=true&url=${siteURL}`}
+        target="_blank"
+        aria-label="Share post on Linkedin"
+        rel="noopener noreferrer"
+        class="grid place-items-center bg-sky-600 text-white size-10 md:size-12 rounded-full hover:bg-sky-700 transition duration-300 hover:scale-90"
+    >
+        <Linkedin class="size-5" />
+    </a>
+    </div>
+</div>
+
+<script is:inline>
+    // Function to copy link url to clipboard
+    document.getElementById("copy-link").addEventListener("click", () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            document.querySelector(".txt-copied").classList.remove("scale-0");
+            document.querySelector(".txt-copied").classList.add("scale-100");
+            setTimeout(() => {
+                document.querySelector(".txt-copied").classList.remove("scale-100");
+                document.querySelector(".txt-copied").classList.add("scale-0");
+            }, 1500);
+        }).catch(err => {
+            console.error("Failed to copy: ", err);
+        });
+    });
+
+</script>

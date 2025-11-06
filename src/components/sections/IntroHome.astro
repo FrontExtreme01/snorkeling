@@ -1,0 +1,50 @@
+---
+import { getI18N } from "@/i18n";
+import { Algas, IntroSnorkel, BgCorales, BgFishes } from "@public/img/allImages";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import TagH1 from "@/components/global/TagH1.astro";
+import TagP from "@/components/global/TagP.astro";
+
+interface Props {
+    title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div class="relative overflow-hidden">
+    <BlockContainer>
+        <div class="text-center md:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
+            <TagH1>{title}</TagH1>
+            <TagP set:html={description} />
+            <div class="w-full my-20">
+                <div class="h-52 md:h-[30rem] relative">
+                    <div class="w-2/5 h-full z-10 absolute top-1/2 md:top-3/5 -translate-y-1/2 -left-2 md:-left-10 -rotate-[12deg] scale-75">
+                        <img
+                            src={BgFishes.src}
+                            alt="The Great Mayan Reef Barrier"
+                            class="w-full h-full object-cover rounded-lg shadow hover:scale-95 transition-all"
+                        />
+                    </div>
+                    <div class="w-1/2 h-full z-20 absolute top-0 left-1/2 -translate-x-1/2">
+                        <img
+                            src={IntroSnorkel.src}
+                            alt="Puerto Morelos Reef"
+                            class="w-full h-full object-cover rounded-lg shadow hover:scale-95 transition-all"
+                        />
+                    </div>
+                    <div class="w-2/5 h-full z-10 absolute -bottom-4 md:-bottom-32 -right-2 md:-right-10 rotate-[12deg] scale-75">
+                        <img
+                            src={BgCorales.src}
+                            alt="Snorkeling in the Mayan Reef"
+                            class="w-full h-full object-cover rounded-lg shadow hover:scale-95 transition-all"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </BlockContainer>
+    <img src={Algas.src} alt="algas de mar" class="absolute top-0 -left-10 md:-left-20 w-40 sm:w-60 lg:w-80 rotate-[130deg]" />
+    <img src={Algas.src} alt="algas de mar" class="absolute bottom-0 -right-10 md:-right-20 w-40 sm:w-60 lg:w-80 -rotate-[130deg]" />
+</div>

@@ -1,0 +1,53 @@
+---
+import { getI18N } from "@/i18n";
+import { Algas } from "@public/img/allImages";
+import { World } from "@/icons/allIcons";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import TagH2 from "@/components/global/TagH2.astro";
+import TagP from "@/components/global/TagP.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const highlights = [
+    {
+        title: i18n.MAYAN_REEF_PAGE.HIGHLIGHTS_MAYAN_REEF.LIST[0].title,
+        description: i18n.MAYAN_REEF_PAGE.HIGHLIGHTS_MAYAN_REEF.LIST[0].description,
+        icon: World,
+    },
+    {
+        title: i18n.MAYAN_REEF_PAGE.HIGHLIGHTS_MAYAN_REEF.LIST[1].title,
+        description: i18n.MAYAN_REEF_PAGE.HIGHLIGHTS_MAYAN_REEF.LIST[1].description,
+        icon: World,
+    },
+    {
+        title: i18n.MAYAN_REEF_PAGE.HIGHLIGHTS_MAYAN_REEF.LIST[2].title,
+        description: i18n.MAYAN_REEF_PAGE.HIGHLIGHTS_MAYAN_REEF.LIST[2].description,
+        icon: World,
+    },
+]
+---
+
+<div class="relative overflow-hidden">
+    <BlockContainer>
+        <div class="text-center md:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
+            <TagH2>{i18n.HOME_PAGE.INTRO.TITLE}</TagH2>
+            <TagP set:html={i18n.HOME_PAGE.INTRO.DESCRIPTION} />
+            <div class="grid grid-cols-1 lg:grid-cols-3 place-items-center gap-4">
+                {highlights.map((item) => (
+                    <div class="p-4 rounded-xl shadow border border-zinc-200 flex flex-col items-center gap-2">
+                        <div class="p-4 grid place-items-center bg-cyan-100 rounded-full mb-4">
+                            <item.icon class="size-8 text-cyan-600" />
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">{item.title}</h3>
+                            <p class="text-base/relaxed">{item.description}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </BlockContainer>
+    <img src={Algas.src} alt="algas de mar" class="absolute top-0 -left-10 md:-left-20 w-40 sm:w-60 lg:w-80 rotate-[130deg]" />
+    <img src={Algas.src} alt="algas de mar" class="absolute bottom-0 -right-10 md:-right-20 w-40 sm:w-60 lg:w-80 -rotate-[130deg]" />
+</div>

@@ -1,0 +1,83 @@
+---
+import { getCategoryBySlug, getPostsByCategoryByPageValidation } from "@/services/wp";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import BlogCategoryCard from "@/components/blog/BlogCategoryCard.astro";
+import SkeletonBlogCard from "@/components/blog/SkeletonBlogCard.astro";
+import TagH1 from "@/components/global/TagH1.astro";
+import TagP from "@/components/global/TagP.astro";
+import PaginationCategoryPosts from "@/components/blog/PaginationCategoryPosts.astro";
+import HeroGradient from "@/components/sections/HeroGradient.astro";
+import CategoriesPosts from "@/components/blog/CategoriesPosts.astro";
+
+const { slug } = Astro.params;
+
+const slugParts = slug?.split("/page/");
+const slugPartCategory = slugParts?.[0]; // Slug de la categoría
+const pageNumber = parseInt(slugParts?.[1] ?? "1", 10); // Número de página (por defecto 1)
+
+const { id, name, slugCategory, totalPosts } = await getCategoryBySlug(slugPartCategory as string);
+const existsPage = await getPostsByCategoryByPageValidation(id ?? null, { page: pageNumber });
+
+if (!id || !existsPage) {
+    return new Response(null, { status: 404 });
+}
+const seoMetaDatos = {
+    title: pageNumber > 1 ? `${name} Archives - Page ${pageNumber} - Snorkeling Adventure` : `${name} Archives - Snorkeling Adventure`,
+    description: pageNumber > 1 ? `Read the articles in our ${name} Archives for your next trip to Cancun and Riviera Maya. Page ${pageNumber}.` : `Read the articles in our ${name} Archives for your next trip to Cancun and Riviera Maya.`,
+};
+
+const dataPosts = {
+    title: pageNumber > 1 ? `${name} Archives - Page ${pageNumber}` : `${name} Archives`,
+    description: id != null ? `Read the articles in our ${name} Archives for your next trip to Cancun and Riviera Maya.` : "",
+};
+---
+
+<BaseLayout seo={seoMetaDatos} offI18n={true}>
+    <HeroGradient
+        title={dataPosts.title}
+        text={dataPosts.description}
+    />
+    <BlockContainer>
+        <!-- Categories -->
+        <div class="w-full md:w-4/5 mx-auto">
+            <p class="text-lg mb-10 text-center! font-semibold">
+                Explore Categories
+            </p>
+            <CategoriesPosts server:defer pathCurrent={slugPartCategory}>
+                <ul
+                    class="space-x-4 my-2 flex overflow-x-scroll animate-pulse scroll-w-none"
+                    style="scrollbar-width: none;"
+                    slot="fallback"
+                >
+                    {
+                        Array.from({ length: 7 }).map(() => (
+                            <li class="w-full h-10 px-20 rounded-full bg-gray-200" />
+                        ))
+                    }
+                </ul>
+            </CategoriesPosts>
+        </div>
+        <!-- Posts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+            <BlogCategoryCard
+                server:defer
+                idCategory={id}
+                page={pageNumber}
+            >
+                {Array.from({ length: 12 }).map(() => (
+                    <SkeletonBlogCard slot="fallback" />
+                ))}
+            </BlogCategoryCard>
+        </div>
+        <!-- Pagination -->
+        <div class="mt-10">
+            <PaginationCategoryPosts
+                server:defer
+                totalPosts={totalPosts}
+                slugCategory={slugCategory}
+                currentPage={pageNumber}
+            />
+        </div>
+    </BlockContainer>
+</BaseLayout>

@@ -1,0 +1,29 @@
+---
+import { getI18N } from "@/i18n";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Hero from "@/components/sections/Hero.astro";
+import IntroHome from "@/components/sections/IntroHome.astro";
+import MapMayanReef from "@/components/sections/MapMayanReef.astro";
+import GalleryHome from "@/components/sections/GalleryHome.astro";
+import FaqsHome from "@/components/sections/FaqsHome.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const seoMetaData = {
+    title: i18n.SEO.HOME_PAGE.TITLE,
+    description: i18n.SEO.HOME_PAGE.DESCRIPTION,
+    metaTitle: i18n.SEO.HOME_PAGE.META_TITLE,
+};
+---
+
+<BaseLayout {seoMetaData}>
+    <Hero />
+    <IntroHome
+        title={i18n.HOME_PAGE.INTRO.TITLE}
+        description={i18n.HOME_PAGE.INTRO.DESCRIPTION}
+    />
+    <MapMayanReef />
+    <GalleryHome texts={i18n.HOME_PAGE.GALLERY} />
+    <FaqsHome />
+</BaseLayout>

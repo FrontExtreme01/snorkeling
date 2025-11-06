@@ -1,0 +1,21 @@
+---
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import TagH1 from "@/components/global/TagH1.astro";
+import TagP from "@/components/global/TagP.astro";
+
+interface Props {
+    title: string;
+    text: string;
+};
+
+const { title, text } = Astro.props;
+---
+<div class="h-140 md:h-140 relative">
+    <div class="absolute inset-0 w-full h-full bg-gradient-to-t from-white via-cyan-400 to-sky-700"></div>
+    <BlockContainer class="relative !mt-0">
+        <div class="py-20 max-w-3xl mx-auto">
+            <TagH1 class="text-center text-white text-shadow-lg/10">{title}</TagH1>
+            <TagP class="text-center!">{text}</TagP>
+        </div>
+    </BlockContainer>
+</div>

@@ -1,0 +1,48 @@
+---
+import { getI18N } from "@/i18n";
+import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
+import { BgMap, Turtle } from "@public/img/allImages";
+import TagH2 from "@/components/global/TagH2.astro";
+import TagP from "@/components/global/TagP.astro";
+import BtnLinkCustom from "@/components/extras/BtnLinkCustom";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+---
+
+<div
+    class="bg-linear-to-br from-sky-800 via-cyan-500 to-sky-500 relative"
+>
+    <TagH2 class="text-white text-center py-20 px-5 mx-auto">
+        {i18n.HOME_PAGE.BEST_SNORKEL.TITLE}
+    </TagH2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 pb-10">
+        <img
+            src={BgMap.src}
+            alt="mapa de snorkeling en cancun"
+            class="w-full h-full object-cover mask-radial-[100%_100%] mask-radial-from-75% mask-radial-at-top lg:mask-radial-at-left"
+        />
+        <div class="px-5 sm:px-10 lg:px-20 py-5 lg:py-8">
+            <TagP
+                class="text-white"
+                set:html={i18n.HOME_PAGE.BEST_SNORKEL.DESCRIPTION}
+            />
+            <div class="text-center my-10">
+                <BtnLinkCustom
+                    client:visible
+                    text={i18n.HOME_PAGE.BEST_SNORKEL.BUTTON}
+                    url={translatePath("/mayan-reef/")}
+                    color="secondary"
+                />
+            </div>
+        </div>
+        <img
+            src={Turtle.src}
+            alt="tortuga marina en el parque nacional arrecife de puerto morelos"
+            class="absolute z-10 -top-14 md:-top-28 -left-10 md:-left-20 w-40 sm:w-60 lg:w-80 rotate-[12deg]"
+        />
+    </div>
+</div>

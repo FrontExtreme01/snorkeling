@@ -1,0 +1,29 @@
+---
+import { BgSnorkelHorizontal } from "@public/img/allImages";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import { getI18N } from "@/i18n";
+import TagH2 from "../global/TagH2.astro";
+import TagP from "../global/TagP.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<BlockContainer>
+    <div class="grid grid-cols-5 bg-linear-to-br from-sky-800 via-cyan-400 to-cyan-800 text-white rounded-3xl gap-5 max-h-120 h-120">
+        <div class="col-span-2 p-20 flex flex-col justify-center">
+            <h2 class="text-3xl font-bold mb-4">{i18n.MAYAN_REEF_PAGE.HERO.TITLE}</h2>
+            <p class="text-lg">{i18n.MAYAN_REEF_PAGE.HERO.DESCRIPTION}</p>
+        </div>
+        <div class="col-span-3">
+            <img src={BgSnorkelHorizontal.src} alt="Background Snorkel" class="h-max rounded-3xl mask-l-from-70% object-cover" />
+        </div>
+    </div>
+</BlockContainer>
+
+<BlockContainer>
+    <div class="max-w-4xl mx-auto">
+        <TagH2 class="text-center">{i18n.MAYAN_REEF_PAGE.HERO.TITLE}</TagH2>
+        <TagP class="text-center!">{i18n.MAYAN_REEF_PAGE.HERO.DESCRIPTION}</TagP>
+    </div>
+</BlockContainer>

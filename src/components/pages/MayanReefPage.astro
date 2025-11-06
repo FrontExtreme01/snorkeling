@@ -1,0 +1,31 @@
+---
+import { getI18N } from "@/i18n";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HeroGradient from "@/components/sections/HeroGradient.astro";
+import Highlights from "@/components/sections/Highlights.astro";
+import InclusionsSnorkel from "@/components/sections/InclusionsSnorkel.astro";
+import GridTexts from "@/components/sections/GridTexts.astro";
+import FaqsHome from "@/components/sections/FaqsHome.astro";
+import TestSection from "../sections/TestSection.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const seoMetaData = {
+    title: i18n.SEO.MAYAN_REEF_PAGE.TITLE,
+    description: i18n.SEO.MAYAN_REEF_PAGE.DESCRIPTION,
+    metaTitle: i18n.SEO.MAYAN_REEF_PAGE.META_TITLE,
+};
+---
+
+<BaseLayout {seoMetaData}>
+    <HeroGradient
+        title={i18n.MAYAN_REEF_PAGE.HERO.TITLE}
+        text={i18n.MAYAN_REEF_PAGE.HERO.DESCRIPTION}
+    />
+    <Highlights />
+    <InclusionsSnorkel />
+    <GridTexts />
+    <TestSection />
+    <FaqsHome />
+</BaseLayout>

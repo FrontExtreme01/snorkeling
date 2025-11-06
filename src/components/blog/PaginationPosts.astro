@@ -1,0 +1,87 @@
+---
+import { BtnPrev, BtnNext } from "@/icons/allIcons";
+import { getTotalPosts } from "@/services/wp";
+
+const { totalPages } = await getTotalPosts();
+
+interface Props {
+    currentPage?: number;
+    baseUrl?: string;
+}
+
+const { currentPage = 1, baseUrl = "/blog" } = Astro.props;
+
+const getPageUrl = (page: number) => `${baseUrl}/page/${page}/`;
+const mainPage = `${baseUrl}/`;
+
+const pages: number[] = [];
+pages.push(currentPage);
+if (currentPage + 1 <= totalPages) pages.push(currentPage + 1);
+if (currentPage + 2 <= totalPages - 1 ) pages.push(currentPage + 2);
+const showEllipsis = currentPage + 2 < totalPages - 1;
+---
+
+<nav class="flex flex-wrap justify-center items-center gap-4">
+    <!-- Previous Button -->
+    {currentPage === 1 ? (
+        <span
+            class="order-2 sm:order-none flex items-center gap-0.5 px-5 sm:px-6 py-2 sm:py-3 uppercase text-xs md:text-sm text-zinc-500"
+        >
+            <BtnPrev class="size-5" /> Previous
+        </span>
+    ) : (
+        <a
+            href={currentPage === 2 ? mainPage : getPageUrl(currentPage - 1)}
+            aria-label="Previous Page"
+            class="order-2 sm:order-none flex items-center gap-0.5 px-5 sm:px-6 py-2 sm:py-3 uppercase text-xs md:text-sm font-semibold cursor-pointer hover:bg-zinc-200 transition-colors rounded-lg"
+        >
+            <BtnPrev class="size-5" /> Previous
+        </a>
+    )}
+    <!-- Pagination Numbers -->
+    <ul class="w-full sm:w-fit order-1 sm:order-none flex justify-center items-center gap-2 text-sm">
+        {pages.map((page) => (
+            <li>
+                <a
+                    href={page === 1 ? mainPage : getPageUrl(page)}
+                    aria-label={`Navigate to page ${page}`}
+                    class={`flex justify-center items-center size-10 font-semibold cursor-pointer rounded-lg transition-colors duration-300 ${currentPage === page ? "bg-cyan-600 hover:bg-cyan-400 text-white" : "bg-white hover:bg-zinc-200"}`}
+                >
+                    {page}
+                </a>
+            </li>
+        ))}
+        {showEllipsis && (
+            <li>
+                <span class="flex justify-center items-center size-10 font-semibold bg-white rounded-lg">...</span>
+            </li>
+        )}
+        {totalPages > 1 && currentPage < totalPages - 1 && (
+            <li>
+                <a
+                    href={getPageUrl(totalPages)}
+                    aria-label={`Navigate to page ${totalPages}`}
+                    class={`flex justify-center items-center size-10 font-semibold cursor-pointer rounded-lg transition-colors duration-300 ${currentPage === totalPages ? "bg-cyan-600 hover:bg-cyan-400" : "bg-white hover:bg-zinc-400"}`}
+                >
+                    {totalPages}
+                </a>
+            </li>
+        )}
+    </ul>
+    <!-- Next Button -->
+    {currentPage === totalPages ? (
+        <span
+            class="order-3 sm:order-none flex items-center gap-0.5 px-5 sm:px-6 py-2 sm:py-3 uppercase text-xs md:text-sm text-zinc-500"
+        >
+            Next <BtnNext class="size-5" />
+        </span>
+    ) : (
+        <a
+            href={getPageUrl(currentPage + 1)}
+            aria-label="Next Page"
+            class="order-3 sm:order-none flex items-center gap-0.5 px-5 sm:px-6 py-2 sm:py-3 uppercase text-xs md:text-sm font-semibold cursor-pointer hover:bg-zinc-200 transition-colors rounded-lg"
+        >
+            Next <BtnNext class="size-5" />
+        </a>
+    )}
+</nav>

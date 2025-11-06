@@ -1,0 +1,111 @@
+---
+import { getI18N } from "@/i18n";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@/i18n/utils";
+import { Logo } from "@public/img/allImages";
+import { Facebook, Instagram, Tiktok, Youtube, Tripadvisor } from "@/icons/allIcons";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const navigation = [
+    {
+        title: t("nav.mayanReef"),
+        link: translatePath("/mayan-reef/"),
+    },
+    {
+        title: t("nav.contact"),
+        link: translatePath("/contact/"),
+    },
+    {
+        title: t("footer.terms"),
+        link: translatePath("/privacy/"),
+    },
+];
+
+const socialMedia = [
+    {
+        title: i18n.ACCESSIBILITY.SOCIAL_MEDIA.GO_TO_FACEBOOK,
+        icon: Facebook,
+        link: "https://www.facebook.com/snorkelingadventurecancun",
+    },
+    {
+        title: i18n.ACCESSIBILITY.SOCIAL_MEDIA.GO_TO_INSTAGRAM,
+        icon: Instagram,
+        link: "https://www.instagram.com/snorkelingadventurecancun/",
+    },
+    {
+        title: i18n.ACCESSIBILITY.SOCIAL_MEDIA.GO_TO_TIKTOK,
+        icon: Tiktok,
+        link: "https://www.tiktok.com/@snorkelingadventure",
+    },
+    {
+        title: i18n.ACCESSIBILITY.SOCIAL_MEDIA.GO_TO_YOUTUBE,
+        icon: Youtube,
+        link: "https://www.youtube.com/@snorkelingadventure",
+    },
+    {
+        title: i18n.ACCESSIBILITY.SOCIAL_MEDIA.GO_TO_TRIPADVISOR,
+        icon: Tripadvisor,
+        link: "https://www.tripadvisor.com/Attraction_Review-g150807-d28040463-Reviews-Snorkel_Adventuring-Cancun_Yucatan_Peninsula.html",
+    },
+];
+---
+
+<footer class="py-5">
+    <div
+        class="mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-0 items-center"
+    >
+        <a href={translatePath("/", lang)} class="mx-auto w-fit">
+            <img src={Logo.src} alt={i18n.ACCESSIBILITY.LOGO} class="w-20" />
+        </a>
+        <nav>
+            <ul
+                class="flex flex-wrap gap-4 md:gap-6 justify-center items-center"
+            >
+                {
+                    navigation.map((item) => (
+                        <li>
+                            <a
+                                class="hover:text-cyan-600 transition-all duration-300"
+                                href={item.link}
+                            >
+                                {item.title}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </nav>
+        <ul class="flex flex-wrap gap-4 md:gap-6 justify-center items-center">
+            {
+                socialMedia.map((item) => (
+                    <li class="group">
+                        <a href={item.link} aria-label={item.title} class="rounded-full p-4 grid place-items-center hover:bg-cyan-600 transition-colors duration-300">
+                            <item.icon class="size-5 text-zinc-400 group-hover:text-white transition-colors duration-300" />
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+    <div class="text-center">
+        <small
+            class="hover:text-cyan-600 transition-colors duration-300"
+            role="contentinfo"
+            aria-label={i18n.ACCESSIBILITY.COPYRIGHT}
+        >
+            &copy; 2025 Snorkeling Adventure. &bull; <a
+                class="hover:underline"
+                href="mailto:info@snorkeladventuring.com"
+                >info@snorkeladventuring.com</a
+            >
+        </small>
+    </div>
+    <div class="text-center mt-2">
+        <small>{t("footer.design")}</small>
+    </div>
+</footer>

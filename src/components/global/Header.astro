@@ -1,0 +1,177 @@
+---
+import { getI18N } from "@/i18n";
+import { getLangFromUrl, useTranslations, useTranslatedPath } from "@/i18n/utils";
+import { Facebook, Instagram, Youtube, Tiktok, Tripadvisor, Menu, Close } from "@/icons/allIcons";
+import { Logo } from "@public/img/allImages";
+import LanguageSelector from "./LanguageSelector.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+interface Props {
+    offI18n?: boolean;
+}
+
+const { offI18n } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const navigation = [
+    {
+        title: t("nav.mayanReef"),
+        link: translatePath("/mayan-reef/"),
+    },
+    {
+        title: t("nav.puertoMorelos"),
+        link: translatePath("/puerto-morelos/"),
+    },
+    {
+        title: t("nav.contact"),
+        link: translatePath("/contact/"),
+    },
+    {
+        title: "Blog",
+        link: "/blog/",
+    },
+];
+
+const socialMedia = [
+    {
+        alt: i18n.ACCESSIBILITY.SOCIAL_MEDIA.GO_TO_FACEBOOK,
+        icon: Facebook,
+        href: "https://www.facebook.com/snorkeladventuringcancun",
+    },
+    {
+        alt: i18n.ACCESSIBILITY.SOCIAL_MEDIA.GO_TO_INSTAGRAM,
+        icon: Instagram,
+        href: "https://www.instagram.com/snorkelingadventurecancun",
+    },
+    {
+        alt: i18n.ACCESSIBILITY.SOCIAL_MEDIA.GO_TO_TIKTOK,
+        icon: Tiktok,
+        href: "https://www.tiktok.com/@snorkelingadventure",
+    },
+    {
+        alt: i18n.ACCESSIBILITY.SOCIAL_MEDIA.GO_TO_YOUTUBE,
+        icon: Youtube,
+        href: "https://www.youtube.com/@snorkeladventuringcancun",
+    },
+    {
+        alt: i18n.ACCESSIBILITY.SOCIAL_MEDIA.GO_TO_TRIPADVISOR,
+        icon: Tripadvisor,
+        href: "https://www.tripadvisor.com/Attraction_Review-g150807-d28040463-Reviews-Snorkeling_Adventure_Cancun-Cancun_Yucatan_Peninsula.html",
+    }
+];
+---
+<header>
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-full px-4 md:px-0 md:w-fit mt-4">
+        <div class="flex sm:justify-between gap-1 sm:gap-4 md:gap-7 items-center px-6 py-1 rounded-full bg-black/20 backdrop-blur-md">
+            <a
+                href={translatePath("/")}
+                aria-label={i18n.ACCESSIBILITY.GO_TO_HOME}
+                class="w-12 hover:scale-95 transition-transform duration-300 mr-auto md:mr-0"
+            >
+                <img src={Logo.src} alt={i18n.ACCESSIBILITY.LOGO} class="w-full object-contain" />
+            </a>
+            <nav class="hidden md:block">
+                <ul class="flex items-center gap-8">
+                    {
+                        navigation.map((item) => (
+                            <li>
+                                <a
+                                    class="whitespace-nowrap text-white hover:text-black transition-colors font-semibold text-sm"
+                                    href={item.link}
+                                >
+                                    {item.title}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </nav>
+            {!offI18n && <LanguageSelector />}
+            <!-- Button Open Menu Mobile -->
+            <button type="button" class="btn-menu hover:bg-gray-200/50 rounded-full p-2 cursor-pointer md:hidden">
+                <span class="sr-only">{i18n.ACCESSIBILITY.MENU.OPEN_MENU}</span>
+                <Menu class="size-5 text-white" />
+            </button>
+        </div>
+    </div>
+    <!-- Mobile Navbar -->
+    <div class="bg-navbar fixed inset-0 z-[100] translate-x-full bg-black/50 backdrop-blur-xs"></div>
+    <nav class="navbar-mobile fixed top-0 left-0 z-[110] -translate-x-56 transition-all duration-300 py-10 px-5 bg-linear-to-br from-sky-700 via-sky-400 to-cyan-600 shadow w-56 h-full rounded-r-4xl flex flex-col min-h-96 overflow-y-scroll">
+        <div class="relative">
+            <button
+                type="button"
+                class="btn-close absolute -top-5 -right-2 p-2 hover:bg-gray-200/50 rounded-full cursor-pointer"
+                aria-label={i18n.ACCESSIBILITY.MENU.CLOSE_MENU}
+            >
+                <Close class="size-6 stroke-3 text-white" />
+            </button>   
+            <a 
+                href={translatePath("/")}
+                aria-label={i18n.ACCESSIBILITY.GO_TO_HOME}
+            >
+                <img
+                    src={Logo.src}
+                    alt={i18n.ACCESSIBILITY.LOGO}
+                    class="mx-auto block w-auto h-20 hover:scale-95 transition-transform duration-300"
+                />
+            </a>
+        </div>
+        <ul class="space-y-10 text-center my-20">
+            {
+                navigation.map((item) => (
+                    <li>
+                        <a
+                            href={item.link}
+                            class="text-lg font-semibold text-white hover:text-black transition-colors duration-300"
+                        >
+                            {item.title}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+        <p class="mt-auto text-center font-semibold text-white text-sm w-full">{i18n.ACCESSIBILITY.SOCIAL_MEDIA.FOLLOW}</p>
+        <ul class="flex flex-wrap justify-center items-center mt-4 gap-2">
+            {
+                socialMedia.map((item) => (
+                    <li>
+                        <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={item.alt}
+                            class="grid place-items-center bg-white size-10 hover:bg-gray-400 rounded-full transition-colors"
+                        >
+                            <item.icon class="size-5 inline-block text-black" />
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+</header>
+
+<script is:inline>
+    document.querySelector('.btn-menu').addEventListener('click', () => {
+        document.querySelector('.bg-navbar').classList.remove('translate-x-full');
+        document.querySelector('.navbar-mobile').classList.remove('-translate-x-56');
+        document.querySelector('#body').classList.add('overflow-hidden');
+    });
+
+    document.querySelector('.btn-close').addEventListener('click', () => {
+        document.querySelector('.bg-navbar').classList.add('translate-x-full');
+        document.querySelector('.navbar-mobile').classList.add('-translate-x-56');
+        document.querySelector('#body').classList.remove('overflow-hidden');
+    });
+
+    document.querySelector('.bg-navbar').addEventListener('click', () => {
+        document.querySelector('.bg-navbar').classList.add('translate-x-full');
+        document.querySelector('.navbar-mobile').classList.add('-translate-x-56');
+        document.querySelector('#body').classList.remove('overflow-hidden');
+    });
+</script>

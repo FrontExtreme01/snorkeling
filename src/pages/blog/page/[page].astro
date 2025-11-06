@@ -1,0 +1,68 @@
+---
+import { getPostsByPageValidation } from "@/services/wp";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import BlogCard from "@/components/blog/BlogCard.astro";
+import SkeletonBlogCard from "@/components/blog/SkeletonBlogCard.astro";
+import PaginationPosts from "@/components/blog/PaginationPosts.astro";
+import HeroGradient from "@/components/sections/HeroGradient.astro";
+import CategoriesPosts from "@/components/blog/CategoriesPosts.astro";
+
+const { page } = Astro.params;
+const pageNumber = parseInt(page as unknown as string, 10);
+const existsPage = await getPostsByPageValidation({ page: pageNumber });
+
+if (!existsPage) {
+    return new Response(null, { status: 404 });
+}
+
+const seoMetaDatos = {
+    title: `Snorkeling Adventure - Page ${pageNumber}`,
+    description: `Get more information in our Blog for your next trip to Cancun and Riviera Maya. Any doubt you have, we will offer the answer. Page ${pageNumber}.`,
+};
+
+const dataPosts = {
+    title: `Snorkeling Adventure - Page ${pageNumber}`,
+    description:
+        "Get more information in our Blog for your next trip to Cancun and Riviera Maya. Any doubt you have, we will offer the answer.",
+};
+---
+
+<BaseLayout seo={seoMetaDatos} offI18n={true}>
+    <HeroGradient title={dataPosts.title} text={dataPosts.description} />
+    <BlockContainer>
+        <!-- Categories -->
+        <div class="w-full md:w-4/5 mx-auto">
+            <p class="text-lg mb-10 text-center! font-semibold">
+                Explore Categories
+            </p>
+            <CategoriesPosts server:defer pathCurrent="blog-home">
+                <ul
+                    class="space-x-4 my-2 flex overflow-x-scroll animate-pulse scroll-w-none"
+                    style="scrollbar-width: none;"
+                    slot="fallback"
+                >
+                    {
+                        Array.from({ length: 7 }).map(() => (
+                            <li class="w-full h-10 px-20 rounded-full bg-gray-200" />
+                        ))
+                    }
+                </ul>
+            </CategoriesPosts>
+        </div>
+        <!-- Posts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+            <BlogCard server:defer page={pageNumber}>
+                {
+                    Array.from({ length: 12 }).map(() => (
+                        <SkeletonBlogCard slot="fallback" />
+                    ))
+                }
+            </BlogCard>
+        </div>
+        <!-- Pagination -->
+        <div class="mt-10">
+            <PaginationPosts server:defer currentPage={pageNumber} />
+        </div>
+    </BlockContainer>
+</BaseLayout>

@@ -1,0 +1,100 @@
+---
+import { getI18N } from "@/i18n";
+import { getLangFromUrl } from "@/i18n/utils";
+import { Phone, Mail, MapPin } from "@/icons/allIcons";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import HeroGradient from "@/components/sections/HeroGradient.astro";
+import FormContact from "@/components/sections/FormContact";
+import FaqsHome from "@/components/sections/FaqsHome.astro";
+import TagH2 from "@/components/global/TagH2.astro";
+import TagP from "@/components/global/TagP.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+const lang = getLangFromUrl(Astro.url);
+
+const optionsContact = [
+    {
+        icon: Phone,
+        title: i18n.CONTACT_PAGE.INFO.OPTIONS.PHONE,
+        value: "+52 998 249 0003",
+        href: "tel:+529982490003",
+    },
+    {
+        icon: Mail,
+        title: i18n.CONTACT_PAGE.INFO.OPTIONS.EMAIL,
+        value: "info@snorkeladventuring.com",
+        href: "mailto:info@snorkeladventuring.com",
+    },
+    {
+        icon: MapPin,
+        title: i18n.CONTACT_PAGE.INFO.OPTIONS.LOCATION,
+        value: "Rafael E. Melgar Street, Puerto Morelos, Quintana Roo, México",
+        href: "https://maps.app.goo.gl/2WnNvjq37taZGhvh9",
+    },
+];
+
+const seoMetaData = {
+    title: i18n.SEO.CONTACT_PAGE.TITLE,
+    description: i18n.SEO.CONTACT_PAGE.DESCRIPTION,
+    metaTitle: i18n.SEO.CONTACT_PAGE.META_TITLE,
+};
+---
+
+<BaseLayout {seoMetaData}>
+    <HeroGradient
+        title={i18n.CONTACT_PAGE.HERO.TITLE}
+        text={i18n.CONTACT_PAGE.HERO.DESCRIPTION}
+    />
+    <BlockContainer>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
+            <div class="py-5">
+                <TagH2>{i18n.CONTACT_PAGE.INFO.TITLE}</TagH2>
+                <TagP>{i18n.CONTACT_PAGE.INFO.DESCRIPTION}</TagP>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {
+                        optionsContact.map((option, index) => (
+                            <div class={`${index === 2 ? "col-span-2 md:col-span-1" : ""} flex flex-col items-start gap-2 rounded-xl border border-zinc-200 h-56 md:h-60 p-4`}>
+                                <div class="p-4 bg-primary/10 rounded-full">
+                                    <option.icon class="size-6" />
+                                </div>
+                                <div class="mt-auto">
+                                    <h3 class="font-semibold text-lg mb-4">
+                                        {option.title}
+                                    </h3>
+                                    <a
+                                        href={option.href}
+                                        class="text-zinc-600 hover:underline inline-block break-all whitespace-normal text-sm"
+                                        target={
+                                            option.title ===
+                                            i18n.CONTACT_PAGE.INFO.OPTIONS
+                                                .LOCATION
+                                                ? "_blank"
+                                                : "_self"
+                                        }
+                                        rel={
+                                            option.title ===
+                                            i18n.CONTACT_PAGE.INFO.OPTIONS
+                                                .LOCATION
+                                                ? "noopener noreferrer"
+                                                : ""
+                                        }
+                                    >
+                                        {option.value}
+                                    </a>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+            <FormContact
+                client:visible
+                lang={lang}
+                i18n={i18n.CONTACT_PAGE.FORM}
+            />
+        </div>
+    </BlockContainer>
+    <FaqsHome />
+</BaseLayout>

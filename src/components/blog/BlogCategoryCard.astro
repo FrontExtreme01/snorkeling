@@ -1,0 +1,73 @@
+---
+import { formatDate, replaceHtmlEntities } from "@/utils/functions";
+import { getPostsByCategoryByPage } from "@/services/wp";
+
+interface Props {
+    page?: number;
+    idCategory: number;
+}
+
+interface Post {
+    slug: string;
+    title: string;
+    featuredImage: string;
+    categories: { name: string; slug: string }[];
+    date: string;
+    readingTime: string;
+}
+
+const { page = 1, idCategory = 0 } = Astro.props;
+
+const { posts } = await getPostsByCategoryByPage(idCategory, { page });
+---
+
+{
+    posts.map((post: Post) => (
+        <article class="p-2 md:p-5">
+            <div class="h-auto">
+                <a
+                    href={`/blog/${post.slug}/`}
+                    aria-label={`Read post ${replaceHtmlEntities(post.title)}`}
+                >
+                    <img
+                        src={post.featuredImage}
+                        alt={replaceHtmlEntities(post.title)}
+                        class="rounded-xl w-full object-cover"
+                    />
+                </a>
+            </div>
+            <div class="mt-10 text-center">
+                <div class="flex flex-wrap justify-center gap-2 mb-4">
+                    {post.categories.map((category, i) => (
+                        <span class="inline-flex items-center gap-2">
+                            <p class="text-cyan-600 font-semibold text-xs md:text-sm hover:underline m-0">
+                                <a
+                                    href={`/blog/category/${category.slug}/`}
+                                    aria-label={`View all posts of ${category.name}`}
+                                >
+                                    {category.name}
+                                </a>
+                            </p>
+                            {i < post.categories.length - 1 && (
+                                <span class="text-cyan-600">&bull;</span>
+                            )}
+                        </span>
+                    ))}
+                </div>
+                <h2 class="text-lg md:text-xl font-semibold mb-4 group">
+                    <a
+                        href={`/blog/${post.slug}/`}
+                        aria-label={`Read post ${replaceHtmlEntities(post.title)}`}
+                        class="bg-linear-to-r from-cyan-600/70 to-cyan-500/50 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px]"
+                    >
+                        {replaceHtmlEntities(post.title)}
+                    </a>
+                </h2>
+                <div class="flex flex-wrap justify-center items-center gap-3 mb-4 text-xs sm:text-sm text-zinc-500">
+                    <p>{formatDate(post.date)}</p>
+                    <p>{post.readingTime} read</p>
+                </div>
+            </div>
+        </article>
+    ))
+}
