@@ -1,17 +1,14 @@
 ---
 import { Image } from "astro:assets";
-import { BgSnorkel } from "@public/img/allImages";
+import { MainHero } from "@public/img/allImages";
+import { getI18N } from "@/i18n";
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
 ---
-<section
-    class="w-full min-h-[calc(100vh-12rem)] relative grid place-items-start"
->
+<section class="w-full min-h-[calc(100vh-13rem)] relative grid place-items-start">
     <Image
-        src={BgSnorkel}
-        alt="snorkel in the mayan reef"
-        class="absolute inset-0 w-full h-full object-cover"
+        src={MainHero}
+        alt={i18n.ACCESSIBILITY.IMAGES.HERO}
+        class="absolute inset-0 w-full h-full object-cover mask-b-from-80%"
     />
-    <div
-        class="bg-linear-to-b from-transparent from-80% to-white absolute inset-0"
-    >
-    </div>
 </section>

@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-interface Props {
+interface LoadBokunScriptProps {
     BookingChannel: string;
 }
 
-const LoadBokunScript = ({ BookingChannel }: Props) => {
+const LoadBokunScript = ({ BookingChannel }: LoadBokunScriptProps) => {
     useEffect(() => {
         const script = document.createElement('script');
         script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${BookingChannel}`;

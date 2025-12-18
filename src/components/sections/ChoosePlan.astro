@@ -1,0 +1,98 @@
+---
+import { getI18N } from "@/i18n";
+import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
+import {
+    PrivateSnorkeling,
+    SnorkelingAdventure,
+    Check,
+} from "@/icons/allIcons";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import TagH2 from "@/components/global/TagH2.astro";
+import TagP from "@/components/global/TagP.astro";
+import BtnLinkCustom from "@/components/extras/BtnLinkCustom";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const plans = [
+    {
+        priority: true,
+        title: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.PRIVATE.TITLE,
+        description: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.PRIVATE.DESCRIPTION,
+        price: 99,
+        features: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.PRIVATE.FEATURES,
+        icon: PrivateSnorkeling,
+        href: translatePath("/private-snorkeling-tour-puerto-morelos/"),
+    },
+    {
+        title: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.SHARED.TITLE,
+        description: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.SHARED.DESCRIPTION,
+        price: 69,
+        features: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.SHARED.FEATURES,
+        icon: SnorkelingAdventure,
+        href: translatePath("/snorkel-adventuring-details/"),
+    },
+];
+---
+
+<div class="relative">
+    <div
+        class="absolute bottom-0 left-0 w-full h-full bg-linear-to-br from-sky-700 via-cyan-400 to-cyan-600 z-0 mask-radial-[100%_70%] md:mask-radial-[60%_50%] mask-radial-from-100% mask-radial-at-bottom"
+    >
+    </div>
+    <BlockContainer class="relative z-10">
+        <TagH2 class="mx-auto text-center max-w-2xl">
+            {i18n.HOME_PAGE.CHOOSE_PLAN.TITLE}
+        </TagH2>
+        <TagP class="text-center! max-w-2xl mx-auto">
+            {i18n.HOME_PAGE.CHOOSE_PLAN.DESCRIPTION}
+        </TagP>
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-10 my-15 max-w-4xl mx-auto"
+        >
+            {
+                plans.map((plan) => (
+                    <div
+                        class={`hover:scale-105 transition duration-300 h-fit ${plan.priority ? "bg-linear-to-br from-sky-700 via-cyan-400 to-cyan-600 shadow-[0px_0px_15px_#00B8DB] text-white border border-white" : "bg-white md:mt-10 shadow-lg border border-zinc-200"} rounded-xl px-6 py-10`}
+                    >
+                        <plan.icon class="size-22" />
+                        <h3 class="mt-4 font-semibold text-xl lg:text-2xl">
+                            {plan.title}
+                        </h3>
+                        <p class="mt-4 text-sm/loose">{plan.description}</p>
+                        <h4 class={`text-4xl font-semibold mt-4`}>
+                            ${plan.price}
+                            <span class={`font-normal text-sm`}>USD</span>
+                        </h4>
+                        <hr
+                            class={`my-8 ${plan.priority ? "border-white" : "border-zinc-300"}`}
+                        />
+                        <ul class="space-y-2 mt-4">
+                            {plan.features.map((item) => (
+                                <li>
+                                    <p class="text-sm lg:text-base">
+                                        <Check class="size-5 inline-block mr-1" />
+                                        {item}
+                                    </p>
+                                </li>
+                            ))}
+                        </ul>
+                        <div class="mt-8">
+                            <BtnLinkCustom
+                                client:visible
+                                text={
+                                    i18n.PUERTO_MORELOS_PAGE.CTA_SECTION.BUTTON
+                                }
+                                url={translatePath(plan.href)}
+                                color={plan.priority ? "secondary" : "primary"}
+                            />
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </BlockContainer>
+</div>

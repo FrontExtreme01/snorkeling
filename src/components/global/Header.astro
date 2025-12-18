@@ -1,5 +1,6 @@
 ---
 import { getI18N } from "@/i18n";
+import { Link, Button } from "@heroui/react";
 import { getLangFromUrl, useTranslations, useTranslatedPath } from "@/i18n/utils";
 import { Facebook, Instagram, Youtube, Tiktok, Tripadvisor, Menu, Close } from "@/icons/allIcons";
 import { Logo } from "@public/img/allImages";
@@ -19,6 +20,10 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
 const navigation = [
+    {
+        title: t("nav.home"),
+        link: translatePath("/"),
+    },
     {
         title: t("nav.mayanReef"),
         link: translatePath("/mayan-reef/"),
@@ -67,7 +72,7 @@ const socialMedia = [
 ---
 <header>
     <div class="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-full px-4 md:px-0 md:w-fit mt-4">
-        <div class="flex sm:justify-between gap-1 sm:gap-4 md:gap-7 items-center px-6 py-1 rounded-full bg-black/20 backdrop-blur-md">
+        <div class="flex sm:justify-between gap-1 sm:gap-4 md:gap-7 items-center px-6 py-1 rounded-full bg-black/20 backdrop-blur-md shadow-lg border border-white/20">
             <a
                 href={translatePath("/")}
                 aria-label={i18n.ACCESSIBILITY.GO_TO_HOME}
@@ -91,7 +96,18 @@ const socialMedia = [
                     }
                 </ul>
             </nav>
-            {!offI18n && <LanguageSelector />}
+            <div class="flex gap-2 items-center">
+                <Button
+                    as={Link}
+                    size="sm"
+                    className="bg-linear-to-br from-sky-700 via-sky-400 to-cyan-500 text-white font-semibold text-xs"
+                    href={translatePath("/snorkel-adventuring-details/")}
+                    radius="full"
+                >
+                    {i18n.ACCESSIBILITY.BUTTON.BOOK_NOW}
+                </Button>
+                {!offI18n && <LanguageSelector />}
+            </div>
             <!-- Button Open Menu Mobile -->
             <button type="button" class="btn-menu hover:bg-gray-200/50 rounded-full p-2 cursor-pointer md:hidden">
                 <span class="sr-only">{i18n.ACCESSIBILITY.MENU.OPEN_MENU}</span>
@@ -101,7 +117,7 @@ const socialMedia = [
     </div>
     <!-- Mobile Navbar -->
     <div class="bg-navbar fixed inset-0 z-[100] translate-x-full bg-black/50 backdrop-blur-xs"></div>
-    <nav class="navbar-mobile fixed top-0 left-0 z-[110] -translate-x-56 transition-all duration-300 py-10 px-5 bg-linear-to-br from-sky-700 via-sky-400 to-cyan-600 shadow w-56 h-full rounded-r-4xl flex flex-col min-h-96 overflow-y-scroll">
+    <nav class="navbar-mobile fixed top-0 left-0 z-[110] -translate-x-56 transition-all duration-300 py-10 px-5 bg-linear-to-br from-sky-800 via-cyan-400 to-cyan-700 shadow w-56 h-full rounded-r-4xl flex flex-col min-h-96 overflow-y-scroll">
         <div class="relative">
             <button
                 type="button"

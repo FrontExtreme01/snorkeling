@@ -1,0 +1,266 @@
+---
+import { getI18N } from "@/i18n";
+import { PMAereal, MujerSalvavidas, SnorkelHorizontal, SeaweedMinimalistWhite, SeaweedWhite, PersonOkSnorkel, SnorkelMayanReef, Turtle, User1, User2, User3 } from "@public/img/allImages";
+import { FlipFlop, Towel, Cash, Swimwear } from "@/icons/allIcons";
+import { Exclamation, Check, Close, Star } from "@/icons/allIcons"
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import GalleryDetail from "@/components/sections/GalleryDetail.astro";
+import MoreActivities from "@/components/sections/MoreActivities.astro";
+import TagH1 from "@/components/global/TagH1.astro";
+import TagH2 from "@/components/global/TagH2.astro";
+import TagH3 from "@/components/global/TagH3.astro";
+import TagP from "@/components/global/TagP.astro";
+import Faqs from "../extras/Faqs";
+import BtnModalBokun from "@/components/extras/BtnModalBokun";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const priceFrom = 59;
+const countStars = 4.8;
+const reviewsCount = "1.2k";
+const bookingChannel = "e17819cf-e2f5-4ea6-83ab-c37adaf3faa1";
+
+const dataForm = {
+    bookingChannel: bookingChannel,
+    title: i18n.DETAIL_PAGE.REGULAR_SNORKELING.FORM_FLOATER.TITLE,
+    btnBook: i18n.DETAIL_PAGE.REGULAR_SNORKELING.FORM_FLOATER.BUTTON_BOOK,
+    btnCloseText: i18n.DETAIL_PAGE.REGULAR_SNORKELING.FORM_FLOATER.BUTTON_CLOSE
+}
+
+const seoMetaData = {
+    title: i18n.SEO.DETAIL_PAGE.REGULAR_SNORKELING.TITLE,
+    description: i18n.SEO.DETAIL_PAGE.REGULAR_SNORKELING.DESCRIPTION,
+    metaTitle: i18n.SEO.DETAIL_PAGE.REGULAR_SNORKELING.META_TITLE,
+};
+---
+
+
+<BaseLayout seo={seoMetaData}>
+    <!-- Hero -->
+    <section class="min-h-100 md:min-h-140 relative overflow-hidden">
+        <div class="absolute inset-0 w-full h-full bg-gradient-to-t from-white via-cyan-400 to-sky-700">
+            <BlockContainer class="relative !mt-0">
+                <div class="py-20 max-w-3xl mx-auto">
+                    <TagH1 class="text-center text-white text-shadow-lg/10">
+                        {i18n.DETAIL_PAGE.REGULAR_SNORKELING.HERO.TITLE}
+                    </TagH1>
+                    <div class="w-fit mx-auto flex flex-wrap items-center justify-center gap-3 p-1.5 pr-4 mt-10 rounded-full border border-slate-300 bg-white/70">
+                        <div class="flex items-center -space-x-3">
+                            <img
+                                class="size-7 rounded-full border-2 border-white"
+                                height={50}
+                                width={50}
+                                src={User1.src}
+                                alt=""
+                            />
+                            <img
+                                class="size-7 rounded-full border-2 border-white"
+                                height={50}
+                                width={50}
+                                src={User2.src}
+                                alt=""
+                            />
+                            <img
+                                class="size-7 rounded-full border-2 border-white"
+                                height={50}
+                                width={50}
+                                src={User3.src}
+                                alt=""
+                            />
+                        </div>
+                        <p class="text-xs">
+                            {reviewsCount}
+                            {i18n.ACCESSIBILITY.PEOPLE_ENJOYED}
+                        </p>
+                    </div>
+                </div>
+            </BlockContainer>
+        </div>
+        <img src={SeaweedWhite.src} alt={i18n.ACCESSIBILITY.IMAGES.SEAWEED} class="absolute top-0 -left-10 md:-left-20 w-40 sm:w-60 lg:w-80 rotate-[130deg]" />
+        <img src={SeaweedMinimalistWhite.src} alt={i18n.ACCESSIBILITY.IMAGES.SEAWEED} class="absolute top-20 -right-10 md:-right-16 w-40 sm:w-60 lg:w-80 -rotate-[110deg]" />
+    </section>
+    <BlockContainer>
+        <!-- Texts Puerto Morelos -->
+        <div class="grid items-center grid-cols-1 lg:grid-cols-2 gap-10">
+            <img src={PMAereal.src} alt={i18n.ACCESSIBILITY.IMAGES.PUERTO_MORELOS_AEREAL} class="object-cover w-full h-full rounded-lg" />
+            <div class="lg:p-10">
+                <TagH2>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.TEXTS.EXPLORE_PUERTO_MORELOS.TITLE}</TagH2>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.TEXTS.EXPLORE_PUERTO_MORELOS.DESCRIPTION}</TagP>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.TEXTS.SNORKELING_EXPERIENCE.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.TEXTS.SNORKELING_EXPERIENCE.DESCRIPTION}</TagP>
+            </div>
+        </div>
+        <!-- Inclusions -->
+        <div class="grid items-center grid-cols-1 lg:grid-cols-2 gap-10 mt-20">
+            <div class="lg:p-10">
+                <TagH2>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.INCLUSIONS.TITLE}</TagH2>
+                <ul class="mt-10 space-y-4 text-base/loose sm:columns-2">
+                    {i18n.DETAIL_PAGE.REGULAR_SNORKELING.INCLUSIONS.INCLUDES.map((item) => (
+                        <li>
+                            <p><Check class="size-5 text-green-600 inline-block mr-1" />{item}</p>
+                        </li>
+                    ))}
+                    {i18n.DETAIL_PAGE.REGULAR_SNORKELING.INCLUSIONS.NOT_INCLUDES.map((item) => (
+                        <li>
+                            <p><Close class="size-5 text-red-600 inline-block mr-1" />{item}</p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <img src={SnorkelHorizontal.src} alt={i18n.ACCESSIBILITY.IMAGES.SNORKEL_HORIZONTAL} class="object-cover w-full rounded-lg" />
+        </div>
+        <!-- What You Should Know -->
+        <TagH2 class="text-center max-w-2xl mx-auto mt-20 mb-10">
+            {i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.TITLE}
+        </TagH2>
+        <div class="grid items-center lg:grid-cols-4 gap-5">
+            <div class="lg:col-span-1 flex flex-col lg:gap-5">
+                <div>
+                    <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.KNOW_BEFORE_YOU_GO.TITLE}</TagH3>
+                    <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.KNOW_BEFORE_YOU_GO.DESCRIPTION}</TagP>
+                </div>
+                <div>
+                    <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.DIVE_INTO_UNSEEN.TITLE}</TagH3>
+                    <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.DIVE_INTO_UNSEEN.DESCRIPTION}</TagP>
+                </div>
+            </div>
+            <div class="lg:col-span-2">
+                <img
+                    src={MujerSalvavidas.src}
+                    alt={i18n.ACCESSIBILITY.IMAGES.LIFEGUARD_WOMAN}
+                    class="w-full object-cover mask-[url('/assets/img/extras/shape-splash.webp')] mask-center mask-no-repeat mask-contain"
+                />
+            </div>
+            <div class="lg:col-span-1 flex flex-col lg:gap-5">
+                <div>
+                    <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.TASTY_BEACHSIDE.TITLE}</TagH3>
+                    <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.TASTY_BEACHSIDE.DESCRIPTION}</TagP>
+                </div>
+                <div>
+                    <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.EASY_TO_GET.TITLE}</TagH3>
+                    <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.EASY_TO_GET.DESCRIPTION}</TagP>
+                </div>
+            </div>
+            <!-- Safety Standards -->
+            <div class="grid sm:grid-cols-2 place-items-center gap-10 lg:col-span-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-amber-300 rounded-full">
+                        <Exclamation class="size-5 text-black" />
+                    </div>
+                    <p class="text-sm/loose font-semibold text-justify">{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.SAFETY_STANDARDS.LIFEJACKET}</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-amber-300 rounded-full">
+                        <Exclamation class="size-5 text-black" />
+                    </div>
+                    <p class="text-sm/loose font-semibold text-justify">{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.SAFETY_STANDARDS.KICKING}</p>
+                </div>
+            </div>
+        </div>
+        <!-- What You Bring -->
+        <TagH2 class="text-center max-w-2xl mx-auto mt-20 mb-10">
+            {i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.TITLE}
+        </TagH2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-sky-100 rounded-lg p-7">
+                <div class="rounded-full p-5 bg-white w-fit">
+                    <Swimwear class="size-10 text-sky-500" />
+                </div>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.SWIMSUIT.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.SWIMSUIT.DESCRIPTION}</TagP>
+            </div>
+            <div class="bg-sky-100 rounded-lg p-7">
+                <div class="rounded-full p-5 bg-white w-fit">
+                    <Towel class="size-10 text-sky-500" />
+                </div>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.TOWEL.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.TOWEL.DESCRIPTION}</TagP>
+            </div>
+            <div class="bg-sky-100 rounded-lg p-7">
+                <div class="rounded-full p-5 bg-white w-fit">
+                    <FlipFlop class="size-10 text-sky-500" />
+                </div>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.WATER_SANDALS.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.WATER_SANDALS.DESCRIPTION}</TagP>
+            </div>
+            <div class="bg-sky-100 rounded-lg p-7">
+                <div class="rounded-full p-5 bg-white w-fit">
+                    <Cash class="size-10 text-sky-500" />
+                </div>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.CASH.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.CASH.DESCRIPTION}</TagP>
+            </div>
+        </div>
+        <!-- Important Information -->
+        <div class="rounded-lg mt-20 grid items-center grid-cols-1 lg:grid-cols-5 gap-10">
+            <img
+                src={PersonOkSnorkel.src}
+                alt={i18n.ACCESSIBILITY.IMAGES.PERSON_OK_SNORKEL}
+                class="w-full h-100 lg:h-150 object-cover object-bottom row-start-2 lg:row-start-auto lg:col-span-2 mask-[url('/assets/img/extras/shape-splash.webp')] mask-center mask-no-repeat mask-size-[100%_100%]"
+            />
+            <div class="lg:p-10 lg:col-span-3 row-start-1 lg:row-start-auto">
+                <TagH2 class="mb-5">{i18n.DETAIL_PAGE.REGULAR_SNORKELING.IMPORTANT_INFO.TITLE}</TagH2>
+                <ul class="list-disc list-inside space-y-3 text-base/loose text-justify">
+                    {i18n.DETAIL_PAGE.REGULAR_SNORKELING.IMPORTANT_INFO.LIST.map((item) => (
+                        <li>{item}</li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    </BlockContainer>
+    <!-- Gallery -->
+    <GalleryDetail
+        title={i18n.DETAIL_PAGE.REGULAR_SNORKELING.GALLERY.TITLE}
+        description={i18n.DETAIL_PAGE.REGULAR_SNORKELING.GALLERY.DESCRIPTION}
+    />
+    <!-- Faqs -->
+    <BlockContainer>
+        <TagH2 class="text-center max-w-2xl mx-auto mb-10 mt-10">
+            {i18n.DETAIL_PAGE.REGULAR_SNORKELING.FAQS.TITLE}
+        </TagH2>
+        <div class="max-w-4xl mx-auto">
+            <Faqs client:visible faqs={i18n.DETAIL_PAGE.REGULAR_SNORKELING.FAQS.FAQS} />
+        </div>  
+    </BlockContainer>
+    <!-- More Activities -->
+    <MoreActivities />
+    <!-- Form Bokun -->
+    <div class="sticky bottom-5 max-w-4xl mx-auto">
+        <div class="flex flex-wrap items-center justify-between gap-2 sm:gap-4 bg-white p-2 md:px-6 md:py-2 rounded-xl border border-zinc-200 shadow mx-4">
+            <div class="flex items-center gap-2">
+                <div class="flex items-center -space-x-4">
+                    <img
+                        class="h-18 w-13 sm:size-18 rounded-lg border-3 border-white object-cover shadow -rotate-6"
+                        height={50}
+                        width={50}
+                        src={PMAereal.src}
+                        alt=""
+                    />
+                    <img
+                        class="h-18 w-13 sm:size-18 rounded-lg border-3 border-white object-cover shadow rotate-3"
+                        height={50}
+                        width={50}
+                        src={SnorkelMayanReef.src}
+                        alt=""
+                    />
+                </div>
+                <div class="pl-3 pt-2">
+                    <p class="font-semibold text-xs sm:text-lg w-fit">{i18n.DETAIL_PAGE.REGULAR_SNORKELING.HERO.TITLE}</p>
+                    <div class="flex items-center my-1">
+                        <div class="flex items-center gap-1">
+                            <Star class="size-4 text-amber-500"/> <span class="text-xs sm:text-sm font-semibold">{countStars}</span>
+                        </div>
+                        <p class="text-xs sm:text-sm ml-2">({reviewsCount} {i18n.ACCESSIBILITY.REVIEWS})</p>
+                    </div>
+                    <p class="font-semibold text-xs sm:text-lg"><span class="text-sm">{i18n.ACCESSIBILITY.PRICE_FROM}</span> ${priceFrom.toFixed(2)} USD</p>
+                </div>
+            </div>
+            <BtnModalBokun  
+                client:visible
+                data={dataForm}
+            />
+        </div>
+    </div>
+</BaseLayout>

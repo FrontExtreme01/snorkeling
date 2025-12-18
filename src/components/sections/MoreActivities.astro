@@ -1,0 +1,110 @@
+---
+import { getI18N } from "@/i18n";
+import {
+    ShapeMap,
+    CenoteAdventuring,
+    ExtremeAdventuring,
+    CityTacoTour,
+} from "@public/img/allImages";
+import { Swiper, SwiperWrapper, SwiperSlide } from "astro-swiper";
+import { BtnNext, BtnPrev, ExternalLink } from "@/icons/allIcons";
+import TagH2 from "@/components/global/TagH2.astro";
+import TagP from "@/components/global/TagP.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const activities = [
+    {
+        image: CenoteAdventuring,
+        title: "Cenote Adventuring",
+        link: "https://extremeadventurecancun.com/cenotes-cancun/",
+    },
+    {
+        image: ExtremeAdventuring,
+        title: "Extreme Adventuring",
+        link: "https://extremeadventurecancun.com/extreme-adventuring-atv-in-cancun/",
+    },
+    {
+        image: CityTacoTour,
+        title: "City Taco Tour",
+        link: "https://extremeadventurecancun.com/city-taco-tour-puerto-morelos/",
+    },
+];
+---
+
+<section
+    class="bg-linear-to-br from-sky-800 via-cyan-400 to-cyan-700 relative mt-10 mask-y-from-95%"
+>
+    <img
+        src={ShapeMap.src}
+        alt={i18n.ACCESSIBILITY.IMAGES.MAP_SNORKEL}
+        class="absolute top-0 right-0 w-1/2 h-full object-cover mask-l-from-70%"
+    />
+    <div class="container mx-auto px-4 md:px-10 pt-20 pb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
+            <div class="lg:col-span-2">
+                <TagH2
+                    class="text-white"
+                    set:html={i18n.PUERTO_MORELOS_PAGE.MORE_ACTIVITIES.TITLE}
+                />
+                <TagP class="text-white">
+                    {i18n.PUERTO_MORELOS_PAGE.MORE_ACTIVITIES.DESCRIPTION}
+                </TagP>
+            </div>
+            <div class="lg:col-span-3 relative">
+                <Swiper
+                    options={{
+                        loop: true,
+                        navigation: {
+                            nextEl: ".btn-next-act",
+                            prevEl: ".btn-prev-act",
+                            disabledClass: "hidden",
+                        },
+                        breakpoints: {
+                            300: {
+                                slidesPerView: 1.2,
+                                spaceBetween: 10,
+                            },
+                            640: {
+                                slidesPerView: 2.2,
+                                spaceBetween: 10,
+                            },
+                            768: {
+                                slidesPerView: 2.2,
+                                spaceBetween: 20,
+                            },
+                        },
+                    }}
+                >
+                    <SwiperWrapper>
+                        {
+                            activities.map((activity) => (
+                                <SwiperSlide>
+                                    <div class="rounded-lg overflow-hidden shadow-lg relative">
+                                        <img
+                                            class="object-cover w-full h-full"
+                                            src={activity.image.src}
+                                            alt={activity.title}
+                                        />
+                                        <a href={activity.link} target="_blank">
+                                            <div class="rounded-full px-3 py-1 bg-white hover:bg-zinc-200 transition-colors duration-200 absolute bottom-3 left-4 flex gap-2 items-center">
+                                                <div class="size-7 rounded-full bg-sky-600 grid place-items-center">
+                                                    <ExternalLink class="size-4 text-white" />
+                                                </div>
+                                                <h3 class="text-sm font-semibold">
+                                                    {activity.title}
+                                                </h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </SwiperSlide>
+                            ))
+                        }
+                        <SwiperWrapper />
+                    </SwiperWrapper>
+                </Swiper>
+            </div>
+        </div>
+    </div>
+</section>

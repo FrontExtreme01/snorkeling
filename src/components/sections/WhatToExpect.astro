@@ -1,0 +1,28 @@
+---
+import { ExploreMayanReef, SwimMayanReef } from "@public/img/allImages";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import TagH2 from "@/components/global/TagH2.astro";
+import { getI18N } from "@/i18n";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<BlockContainer>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div class="relative h-80 sm:h-120 xl:h-140 mb-20 sm:mb-28">
+            <img src={ExploreMayanReef.src} alt={i18n.ACCESSIBILITY.IMAGES.EXPLORE_MAYAN_REEF} class="absolute top-0 left-0 w-3/4 h-full object-cover z-10 rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] border-4 border-white shadow-2xl" />
+            <img src={SwimMayanReef.src} alt={i18n.ACCESSIBILITY.IMAGES.SWIM_MAYAN_REEF} class="absolute top-32 md:top-52 right-0 w-1/2 h-3/4 object-cover z-10 rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] border-4 border-white shadow-2xl" />
+        </div>
+        <div class="lg:px-10">
+            <TagH2>{i18n.MAYAN_REEF_PAGE.WHAT_TO_EXPECT.TITLE}</TagH2>
+            <ul class="list-disc list-inside mt-10 space-y-4 text-base/loose text-justify">
+                {i18n.MAYAN_REEF_PAGE.WHAT_TO_EXPECT.LIST.map((item) => (
+                    <li>
+                        <strong>{item.TITLE}:</strong> {item.DESCRIPTION}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </div>
+</BlockContainer>

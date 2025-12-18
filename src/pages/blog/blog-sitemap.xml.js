@@ -23,9 +23,6 @@ export async function GET(context) {
             <url>
                 <loc>${domain}blog/</loc>
             </url>
-            <url>
-                <loc>${domain}blog/cancun-trip-guide-for-adventures/</loc>
-            </url>
             ${allPosts.map(post => `
             <url>
                 <loc>${domain}blog/${post.slug}/</loc>

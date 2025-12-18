@@ -18,7 +18,7 @@ const iconSvg = (props: any) => {
 export default function Faqs({ faqs }: FaqsProps) {
 
     const itemClasses = {
-        title: "text-sm/loose lg:text-lg/loose font-semibold",
+        title: "text-base/loose lg:text-lg/loose font-semibold",
         indicator: "data-[open=true]:-rotate-135"
     }
 
@@ -30,8 +30,7 @@ export default function Faqs({ faqs }: FaqsProps) {
                     aria-label={faq.question}
                     title={faq.question}
                     indicator={iconSvg}
-                    className="rounded-xl mb-3 p-5 shadow border border-zinc-200 text-sm/relaxed md:text-base/loose"
-                    
+                    className="rounded-xl mb-3 p-5 shadow border border-zinc-200 text-base/loose"
                 >
                     {faq.answer}
                 </AccordionItem>

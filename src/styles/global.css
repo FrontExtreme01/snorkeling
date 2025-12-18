@@ -4,6 +4,10 @@
 @plugin '@/utils/hero.ts';
 @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 
+@theme {
+    --font-poppins: "Poppins", sans-serif;
+}
+
 /* Import Fonts */
 @font-face {
     font-family: 'Poppins';
@@ -29,16 +33,8 @@
     font-display: swap;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
 body {
-    font-family: "Poppins", sans-serif;
-    background-color: #fff;
-    font-weight: 300;
+    @apply bg-white font-poppins font-light;
 }
 
 strong {

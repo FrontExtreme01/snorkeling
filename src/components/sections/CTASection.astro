@@ -1,0 +1,39 @@
+---
+import { getI18N } from "@/i18n";
+import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
+import { SnorkelHorizontal } from "@public/img/allImages";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import BtnLinkCustom from "@/components/extras/BtnLinkCustom";
+import TagH2 from "@/components/global/TagH2.astro";
+import TagP from "@/components/global/TagP.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+---
+
+<BlockContainer>
+    <div class="grid lg:grid-cols-7 bg-linear-to-br from-sky-800 via-cyan-400 to-cyan-700 text-white rounded-3xl gap-5">
+        <div class="row-start-2 lg:row-start-1 lg:col-span-4 p-10 lg:p-20 flex flex-col justify-center">
+            <TagH2>
+                {i18n.PUERTO_MORELOS_PAGE.CTA_SECTION.TITLE}
+            </TagH2>
+            <TagP>{i18n.PUERTO_MORELOS_PAGE.CTA_SECTION.DESCRIPTION}</TagP>
+            <div class="mt-10">
+                <BtnLinkCustom
+                    client:visible
+                    text={i18n.PUERTO_MORELOS_PAGE.CTA_SECTION.BUTTON}
+                    url={translatePath("/snorkel-adventuring-details/")}
+                    color="secondary"
+                />
+            </div>
+        </div>
+        <img
+            src={SnorkelHorizontal.src}
+            alt={i18n.ACCESSIBILITY.IMAGES.SNORKEL_HORIZONTAL}
+            class="lg:col-span-3 w-full h-full rounded-3xl mask-b-from-70% lg:mask-l-from-70% object-cover aspect-[9/7]"
+        />
+    </div>
+</BlockContainer>

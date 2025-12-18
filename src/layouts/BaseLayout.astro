@@ -9,6 +9,7 @@ const lang = getLangFromUrl(Astro.url);
 const { seo, offI18n } = Astro.props;
 ---
 
+<!doctype html>
 <html lang={lang}>
     <head>
         <Head {...seo} />
@@ -16,7 +17,9 @@ const { seo, offI18n } = Astro.props;
     </head>
     <body id="body">
         <Header offI18n={offI18n} />
-        <slot />
+        <main>
+            <slot />
+        </main>
         <Footer />
     </body>
 </html>

@@ -6,7 +6,7 @@ interface ButtonProps {
     color?: "primary" | "secondary" | "tertiary";
 }
 
-export default function ButtonLinkCustom({ text, url, color}: ButtonProps) {
+export default function BtnLinkCustom({ text, url, color}: ButtonProps) {
 
     const colors = {
         primary: "bg-linear-to-br from-sky-700 via-sky-400 to-cyan-500 text-white font-semibold text-base",

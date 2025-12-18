@@ -1,0 +1,125 @@
+---
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import TagH2 from "@/components/global/TagH2.astro";
+import TagP from "@/components/global/TagP.astro";
+
+interface Props {
+    title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<section class="mt-20">
+    <div class="max-w-2xl mx-auto px-5">
+        <TagH2 class="text-center">{title}</TagH2>
+        <TagP class="md:text-center!">{description}</TagP>
+    </div>
+    <div class="grid grid-cols-3 lg:grid-cols-4 grid-rows-6 lg:grid-rows-5 gap-2 md:gap-3 max-h-350 md:max-h-600 lg:max-h-300 mt-10">
+        <div
+            class="rounded-lg col-span-3 lg:col-auto"
+            data-fancybox="gallery"
+            data-src="/assets/img/gallery/1.webp"
+        >
+            <img
+                class="rounded-lg w-full h-full object-cover"
+                alt="Snorkeling Adventure Image 1"
+                src="/assets/img/gallery/1.webp"
+            />
+        </div>
+        <div
+            class="rounded-lg col-span-2 row-start-2 lg:row-start-auto lg:col-auto"
+            data-fancybox="gallery"
+            data-src="/assets/img/gallery/2.webp"
+        >
+            <img
+                class="rounded-lg w-full h-full object-cover"
+                alt="Snorkeling Adventure Image 2"
+                src="/assets/img/gallery/2.webp"
+            />
+        </div>
+        <div
+            class="rounded-lg col-start-3 row-start-2 lg:col-span-2 lg:row-span-2"
+            data-fancybox="gallery"
+            data-src="/assets/img/gallery/3.webp"
+        >
+            <img
+                class="rounded-lg w-full h-full object-cover"
+                alt="Snorkeling Adventure Image 3"
+                src="/assets/img/gallery/3.webp"
+            />
+        </div>
+        <div
+            class="rounded-lg row-start-3 lg:col-span-2 lg:row-span-2 lg:row-start-2"
+            data-fancybox="gallery"
+            data-src="/assets/img/gallery/4.webp"
+        >
+            <img
+                class="rounded-lg w-full h-full object-cover"
+                alt="Snorkeling Adventure Image 4"
+                src="/assets/img/gallery/4.webp"
+            />
+        </div>
+        <div
+            class="rounded-lg col-span-2 lg:col-auto lg:col-start-3 row-start-3"
+            data-fancybox="gallery"
+            data-src="/assets/img/gallery/5.webp"
+        >
+            <img
+                class="rounded-lg w-full h-full object-cover"
+                alt="Snorkeling Adventure Image 5"
+                src="/assets/img/gallery/5.webp"
+            />
+        </div>
+        <div
+            class="rounded-lg col-span-3 lg:col-auto lg:col-start-4 row-start-4 lg:row-start-3"
+            data-fancybox="gallery"
+            data-src="/assets/img/gallery/6.webp"
+        >
+            <img
+                class="rounded-lg w-full h-full object-cover"
+                alt="Snorkeling Adventure Image 6"
+                src="/assets/img/gallery/6.webp"
+            />
+        </div>
+        <div
+            class="rounded-lg col-span-2 lg:col-auto lg:row-span-2 row-start-5 lg:row-start-4"
+            data-fancybox="gallery"
+            data-src="/assets/img/gallery/7.webp"
+        >
+            <img
+                class="rounded-lg w-full h-full object-cover"
+                alt="Snorkeling Adventure Image 7"
+                src="/assets/img/gallery/7.webp"
+            />
+        </div>
+        <div
+            class="rounded-lg col-start-3 lg:col-auto lg:row-span-2 row-start-5 lg:row-start-4"
+            data-fancybox="gallery"
+            data-src="/assets/img/gallery/8.webp"
+        >
+            <img
+                class="rounded-lg w-full h-full object-cover"
+                alt="Snorkeling Adventure Image 8"
+                src="/assets/img/gallery/8.webp"
+            />
+        </div>
+        <div
+            class="rounded-lg col-span-3 lg:col-span-2 lg:row-span-2 row-start-6 lg:row-start-4"
+            data-fancybox="gallery"
+            data-src="/assets/img/gallery/9.webp"
+        >
+            <img
+                class="rounded-lg w-full h-full object-cover"
+                alt="Snorkeling Adventure Image 9"
+                src="/assets/img/gallery/9.webp"
+            />
+        </div>
+    </div>
+</section>
+
+<script>
+    import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
+    Fancybox.bind("[data-fancybox]", {});
+</script>

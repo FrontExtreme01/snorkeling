@@ -4,6 +4,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Hero from "@/components/sections/Hero.astro";
 import IntroHome from "@/components/sections/IntroHome.astro";
 import MapMayanReef from "@/components/sections/MapMayanReef.astro";
+import ChoosePlan from "@/components/sections/ChoosePlan.astro";
 import GalleryHome from "@/components/sections/GalleryHome.astro";
 import FaqsHome from "@/components/sections/FaqsHome.astro";
 
@@ -17,13 +18,11 @@ const seoMetaData = {
 };
 ---
 
-<BaseLayout {seoMetaData}>
-    <Hero />
-    <IntroHome
-        title={i18n.HOME_PAGE.INTRO.TITLE}
-        description={i18n.HOME_PAGE.INTRO.DESCRIPTION}
-    />
+<BaseLayout seo={seoMetaData}>
+    <Hero />    
+    <IntroHome />
     <MapMayanReef />
-    <GalleryHome texts={i18n.HOME_PAGE.GALLERY} />
+    <ChoosePlan />
+    <GalleryHome />
     <FaqsHome />
 </BaseLayout>

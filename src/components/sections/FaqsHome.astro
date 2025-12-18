@@ -1,7 +1,7 @@
 ---
 import { getI18N } from "@/i18n";
-import BlockContainer from "@/components/global/BlockContainer.astro";
 import { BgCorales } from "@public/img/allImages";
+import BlockContainer from "@/components/global/BlockContainer.astro";
 import TagH2 from "@/components/global/TagH2.astro";
 import TagH3 from "@/components/global/TagH3.astro";
 import TagP from "@/components/global/TagP.astro";
@@ -25,16 +25,16 @@ const i18n = getI18N({ currentLocale });
             >
                 <img
                     src={BgCorales.src}
-                    alt="corales del arrecife de puerto morelos"
+                    alt={i18n.ACCESSIBILITY.IMAGES.INTRO_HOME.CORALS}
                     class="absolute inset-0 z-10 w-full h-full object-cover rounded-xl"
                 />
                 <div class="bg-white rounded-xl p-5 relative z-20 mb-5 mx-5">
-                    <TagH3 class="text-center"
-                        >{i18n.HOME_PAGE.FAQS.CARD_CONTACT.TITLE}</TagH3
-                    >
-                    <p class="text-sm/loose md:text-base text-justify my-5">
+                    <TagH3 class="text-center">
+                        {i18n.HOME_PAGE.FAQS.CARD_CONTACT.TITLE}
+                    </TagH3>
+                    <TagP>
                         {i18n.HOME_PAGE.FAQS.CARD_CONTACT.DESCRIPTION}
-                    </p>
+                    </TagP>
                     <div class="text-center">
                         <BtnLinkCustom
                             client:visible

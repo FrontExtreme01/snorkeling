@@ -18,6 +18,7 @@ export const showDefaultLang = false;
 
 export const ui = {
     en: {
+        'nav.home': 'Home',
         'nav.mayanReef': 'Mayan Reef',
         'nav.puertoMorelos': 'Puerto Morelos',
         'nav.contact': 'Contact',
@@ -25,6 +26,7 @@ export const ui = {
         'footer.design': 'Design by Grupo Extreme',
     },
     es: {
+        'nav.home': 'Inicio',
         'nav.mayanReef': 'Arrecife Maya',
         'nav.puertoMorelos': 'Puerto Morelos',
         'nav.contact': 'Contacto',

@@ -2,6 +2,10 @@
 import { getI18N } from "@/i18n";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import HeroGradient from "@/components/sections/HeroGradient.astro";
+import ExplorePuertoMorelos from "@/components/sections/ExplorePuertoMorelos.astro";
+import GridTextsPM from "@/components/sections/GridTextsPM.astro";
+import CTASection from "@/components/sections/CTASection.astro";
+import FaqsHome from "@/components/sections/FaqsHome.astro";
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
@@ -13,9 +17,13 @@ const seoMetaData = {
 };
 ---
 
-<BaseLayout {seoMetaData}>
+<BaseLayout seo={seoMetaData}>
     <HeroGradient
         title={i18n.PUERTO_MORELOS_PAGE.HERO.TITLE}
         text={i18n.PUERTO_MORELOS_PAGE.HERO.DESCRIPTION}
     />
+    <ExplorePuertoMorelos />
+    <GridTextsPM />
+    <CTASection />
+    <FaqsHome />
 </BaseLayout>

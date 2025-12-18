@@ -1,0 +1,64 @@
+---
+import { getI18N } from "@/i18n";
+import { ShapeMap } from "@public/img/allImages"
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import TagH3 from "@/components/global/TagH3.astro";
+import TagP from "@/components/global/TagP.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<BlockContainer>
+    <div class="grid grid-cols-1 lg:grid-cols-9 lg:grid-rows-2 gap-5">
+        <div class="bg-sky-100 rounded-lg lg:col-span-5 relative">
+            <img src={ShapeMap.src} alt={i18n.ACCESSIBILITY.IMAGES.MAP_SNORKEL} class="absolute top-0 right-0 w-1/2 h-full object-cover rounded-lg mask-l-from-60%" />
+            <div class="p-10">
+                <TagH3>{i18n.MAYAN_REEF_PAGE.GRID_TEXTS.SNORKEL_TOURS.TITLE}</TagH3>
+                <TagP set:html={i18n.MAYAN_REEF_PAGE.GRID_TEXTS.SNORKEL_TOURS.DESCRIPTION} />
+            </div>
+        </div>
+        <div class="bg-sky-100 rounded-lg lg:col-span-4">
+            <div class="p-10">
+                <TagH3>{i18n.MAYAN_REEF_PAGE.GRID_TEXTS.IMPORTANCE_NATIONAL_PARK.TITLE}</TagH3>
+                <TagP set:html={i18n.MAYAN_REEF_PAGE.GRID_TEXTS.IMPORTANCE_NATIONAL_PARK.DESCRIPTION} />
+            </div>
+        </div>
+        <div class="bg-sky-100 rounded-lg lg:col-span-3">
+            <div class="p-10">
+                <TagH3>{i18n.MAYAN_REEF_PAGE.GRID_TEXTS.FLORA_FAUNA.TITLE}</TagH3>
+                <ul class="list-disc list-inside mt-10 space-y-4 text-base/loose">
+                    {i18n.MAYAN_REEF_PAGE.GRID_TEXTS.FLORA_FAUNA.LIST.map((item) => (
+                        <li>
+                            <strong>{item.TITLE}:</strong> {item.DESCRIPTION}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+        <div class="bg-sky-100 rounded-lg lg:col-span-3">
+            <div class="p-10">
+                <TagH3>{i18n.MAYAN_REEF_PAGE.GRID_TEXTS.BENEFITS_SNORKEL_TOURS.TITLE}</TagH3>
+                <ul class="list-disc list-inside mt-10 space-y-4 text-base/loose">
+                    {i18n.MAYAN_REEF_PAGE.GRID_TEXTS.BENEFITS_SNORKEL_TOURS.LIST.map((item) => (
+                        <li>
+                            <strong>{item.TITLE}:</strong> {item.DESCRIPTION}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+        <div class="bg-sky-100 rounded-lg lg:col-span-3">
+            <div class="p-10">
+                <TagH3>{i18n.MAYAN_REEF_PAGE.GRID_TEXTS.MAKING_MOST_VISIT.TITLE}</TagH3>
+                <ul class="list-disc list-inside mt-10 space-y-4 text-base/loose">
+                    {i18n.MAYAN_REEF_PAGE.GRID_TEXTS.MAKING_MOST_VISIT.LIST.map((item) => (
+                        <li>
+                            <strong>{item.TITLE}:</strong> {item.DESCRIPTION}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    </div>
+</BlockContainer>
