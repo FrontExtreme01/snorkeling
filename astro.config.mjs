@@ -1,14 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import node from '@astrojs/node';
 
 export default defineConfig({
   site: 'https://snorkelingadventure.vercel.app',
-  adapter: vercel(),
+  adapter: node({
+    mode: 'standalone'
+  }),
   output: 'server',
   trailingSlash: 'always',
   integrations: [react(), mdx(), sitemap({
@@ -33,5 +35,5 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
 });
