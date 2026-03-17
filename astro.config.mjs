@@ -12,6 +12,9 @@ export default defineConfig({
     mode: 'standalone'
   }),
   output: 'server',
+  server: {
+    host: true
+  },
   trailingSlash: 'always',
   integrations: [react(), mdx(), sitemap({
     i18n: {
