@@ -4,8 +4,6 @@ import HeroGradient from "@/components/sections/HeroGradient.astro";
 import BlockContainer from "@/components/global/BlockContainer.astro";
 import BlogCard from "@/components/blog/BlogCard.astro";
 import SkeletonBlogCard from "@/components/blog/SkeletonBlogCard.astro";
-import PaginationPosts from "@/components/blog/PaginationPosts.astro";
-import CategoriesPosts from "@/components/blog/CategoriesPosts.astro";
 
 const seoMetaDatos = {
     title: "Snorkeling Adventure - Blog",
@@ -28,13 +26,6 @@ const dataPosts = {
         <!-- Categories -->
         <div class="w-full md:w-4/5 mx-auto">
             <p class="text-lg mb-10 text-center! font-semibold">Explore Categories</p>
-            <CategoriesPosts server:defer pathCurrent="blog-home">
-                <ul class="space-x-4 my-2 flex overflow-x-scroll animate-pulse scroll-w-none" style="scrollbar-width: none;" slot="fallback">
-                    {Array.from({ length: 7 }).map(() => (
-                        <li class="w-full h-10 px-20 rounded-full bg-gray-200"></li>
-                    ))}
-                </ul>
-            </CategoriesPosts>
         </div>
         <!-- Posts -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
@@ -45,10 +36,6 @@ const dataPosts = {
                     ))
                 }
             </BlogCard>
-        </div>
-        <!-- Pagination -->
-        <div class="mt-10">
-            <PaginationPosts server:defer />
         </div>
     </BlockContainer>
 </BaseLayout>
