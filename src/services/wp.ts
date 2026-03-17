@@ -1,4 +1,4 @@
-const domain = import.meta.env.WP_BLOG;
+const domain = "https://snorkeladventuring.com/blog";
 const apiURl = `${domain}/wp-json/wp/v2`;
 
 // Obtener el número total de posts/entradas
