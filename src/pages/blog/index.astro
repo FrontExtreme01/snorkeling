@@ -1,10 +1,8 @@
 ---
-export const prerender = true;
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import HeroGradient from "@/components/sections/HeroGradient.astro";
 import BlockContainer from "@/components/global/BlockContainer.astro";
-import BlogCard from "@/components/blog/BlogCard.astro";
-import SkeletonBlogCard from "@/components/blog/SkeletonBlogCard.astro";
+import Posts from "@/components/blog/Posts";
 
 const seoMetaDatos = {
     title: "Snorkeling Adventure - Blog",
@@ -30,13 +28,7 @@ const dataPosts = {
         </div>
         <!-- Posts -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
-            <BlogCard server:defer>
-                {
-                    Array.from({ length: 12 }).map(() => (
-                        <SkeletonBlogCard slot="fallback" />
-                    ))
-                }
-            </BlogCard>
+            <Posts client:load />
         </div>
     </BlockContainer>
 </BaseLayout>
