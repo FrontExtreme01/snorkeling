@@ -166,12 +166,10 @@ export default function FormContact({ i18n }: FormContactProps) {
                                 {isError ? (
                                     <>
                                         <h2 className="text-2xl font-semibold"> {i18n.ERROR_FORM.TITLE} </h2>
-                                        <p className="text-lg/relaxed"> {i18n.ERROR_FORM.DESCRIPTION} </p>
                                     </>
                                 ) : (
                                     <>
                                         <h2 className="text-2xl font-semibold"> {i18n.SUCCESS_FORM.TITLE} </h2>
-                                        <p className="text-lg/relaxed"> {i18n.SUCCESS_FORM.DESCRIPTION} </p>
                                     </>
                                 )}
                             </ModalHeader>

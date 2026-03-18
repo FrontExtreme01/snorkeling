@@ -1,5 +1,5 @@
 import { defineAction, ActionError } from "astro:actions";
-import { z } from "astro:schema";
+import { z } from "astro/zod";
 import { Resend } from "resend";
 import { getI18N } from "@/i18n";
 import { experimental_AstroContainer } from 'astro/container';
@@ -14,7 +14,7 @@ export const server = {
         accept: "form",
         input: z.object({
             fullname: z.string(),
-            email: z.string().email(),
+            email: z.email(),
             phone: z.string(),
             subject: z.string(),
             message: z.string(),
