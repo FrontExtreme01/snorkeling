@@ -1,57 +1,54 @@
 ---
 import { getI18N } from "@/i18n";
-import { SeaweedBlue } from "@public/img/allImages";
-import {
-    TripadvisorBOTB,
-    NatGeoTraveller,
-    WorldTravelAwards,
-} from "@/icons/allIcons";
+import { SeaweedBlue, ExploreMayanReef } from "@public/img/allImages";
+import { TripadvisorBOTB, NatGeoTraveller, WorldTravelAwards } from "@/icons/allIcons";
 import BlockContainer from "@/components/global/BlockContainer.astro";
 import TagH1 from "@/components/global/TagH1.astro";
 import TagP from "@/components/global/TagP.astro";
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
-
-const awardsSnorkeling = [
-    {
-        title: i18n.HOME_PAGE.AWARDS.TRIPADVISOR.TITLE,
-        description: i18n.HOME_PAGE.AWARDS.TRIPADVISOR.DESCRIPTION,
-        icon: TripadvisorBOTB,
-    },
-    {
-        title: i18n.HOME_PAGE.AWARDS.NATIONAL_GEOGRAPHIC.TITLE,
-        description: i18n.HOME_PAGE.AWARDS.NATIONAL_GEOGRAPHIC.DESCRIPTION,
-        icon: NatGeoTraveller,
-    },
-    {
-        title: i18n.HOME_PAGE.AWARDS.WORLD_TRAVEL_AWARDS.TITLE,
-        description: i18n.HOME_PAGE.AWARDS.WORLD_TRAVEL_AWARDS.DESCRIPTION,
-        icon: WorldTravelAwards,
-    },
-];
 ---
 
-<div class="relative overflow-hidden">
+<div class="relative overflow-hidden mt-10">
     <BlockContainer class="relative z-10">
         <div class="text-center md:max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
             <TagH1>{i18n.HOME_PAGE.INTRO.TITLE}</TagH1>
             <TagP set:html={i18n.HOME_PAGE.INTRO.DESCRIPTION} />
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-10">
-            {awardsSnorkeling.map((item) =>(
-            <div class="shadow border border-zinc-100 bg-white rounded-lg p-4 flex items-center">
-                <item.icon class="w-70" />
-                <div class="ml-4">
-                    <h3 class="font-semibold text-lg mb-2">
-                        {item.title}
-                    </h3>
-                    <p class="text-sm/loose text-justify">
-                        {item.description}
-                    </p>
+        <div class="relative mx-auto w-fit">
+            <img
+                src={ExploreMayanReef.src}
+                alt={i18n.ACCESSIBILITY.IMAGES.PERSON_OK_SNORKEL}
+                class="w-150 md:w-140 h-130 sm:h-full object-cover z-10 rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] border-4 border-white shadow-2xl"
+            />
+            <div class="absolute top-10 -left-5 md:-left-25">
+                <div class="flex items-center px-2 py-3 bg-white shadow rounded-lg w-60 md:w-100">
+                    <div class="p-1"><TripadvisorBOTB class="inline-block size-10 md:size-15" /></div>
+                    <div class="mx-2">
+                        <h2 class="font-semibold text-sm lg:text-base">{i18n.HOME_PAGE.AWARDS.TRIPADVISOR.TITLE}</h2>
+                        <p class="italic text-xs">{i18n.HOME_PAGE.AWARDS.TRIPADVISOR.DESCRIPTION}</p>
+                    </div>
                 </div>
             </div>
-            ))}
+            <div class="absolute top-1/2 -translate-y-1/2 -right-5 md:-right-25">
+                <div class="flex items-center px-2 py-3 bg-white shadow rounded-lg w-60 md:w-90">
+                    <div class="p-1"><NatGeoTraveller class="inline-block size-10 md:size-15" /></div>
+                    <div class="mx-2">
+                        <h2 class="font-semibold text-sm lg:text-base">{i18n.HOME_PAGE.AWARDS.NATIONAL_GEOGRAPHIC.TITLE}</h2>
+                        <p class="italic text-xs">{i18n.HOME_PAGE.AWARDS.NATIONAL_GEOGRAPHIC.DESCRIPTION}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-10 -left-5 md:-left-25">
+                <div class="flex items-center px-2 py-3 bg-white shadow rounded-lg w-60 md:w-90">
+                    <div class="p-1"><WorldTravelAwards class="inline-block size-10 md:size-15" /></div>
+                    <div class="mx-2">
+                        <h2 class="font-semibold text-sm lg:text-base">{i18n.HOME_PAGE.AWARDS.WORLD_TRAVEL_AWARDS.TITLE}</h2>
+                        <p class="italic text-xs">{i18n.HOME_PAGE.AWARDS.WORLD_TRAVEL_AWARDS.DESCRIPTION}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </BlockContainer>
     <img
