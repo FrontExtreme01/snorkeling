@@ -1,7 +1,5 @@
 ---
-export const prerender = false;
-
-import { getPostInfo } from "@/services/wp";
+import { getPostInfo, getAllPostSitemap } from "@/services/wp";
 import { formatDate, replaceHtmlEntities } from "@/utils/functions";
 import { Schema } from "astro-seo-schema";
 import BaseLayout from "@/layouts/BaseLayout.astro";
@@ -11,6 +9,14 @@ import TagP from "@/components/global/TagP.astro";
 import SharePost from "@/components/extras/SharePost.astro";
 
 const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+    const posts = await getAllPostSitemap({});
+    console.log("Posts for getStaticPaths:", posts); // Debug log to check the structure of posts
+    return posts.map((post: { slug: string }) => ({
+        params: { slug: post.slug },
+    }));
+}
 
 const {
     title,

@@ -18,7 +18,7 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [react(), mdx(), sitemap({
     i18n: {
-      defaultLocale: 'en',
+      defaultLocale: 'en', 
       locales: {
         en: 'en-US',
         es: 'es-ES',

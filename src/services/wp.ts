@@ -208,7 +208,7 @@ export const getPostsByPage = async ({ perPage = 12, page = 1 }: { perPage?: num
 }
 
 // Obtener todos los posts/entradas (sitemap)
-export const getAllPostSitemap = async ({ perPage = 12, page = 1 }: { perPage?: number; page?: number }) => {
+export const getAllPostSitemap = async ({ perPage = 100, page = 1 }: { perPage?: number; page?: number }) => {
     const response = await fetch(`${apiURl}/posts?per_page=${perPage}&page=${page}`);
 
     if (!response.ok) {
