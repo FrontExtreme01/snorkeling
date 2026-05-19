@@ -1,4 +1,5 @@
 ---
+import { Schema } from "astro-seo-schema";
 import { getI18N } from "@/i18n";
 import { Phone, Mail, MapPin } from "@/icons/allIcons";
 import BaseLayout from "@/layouts/BaseLayout.astro";
@@ -22,8 +23,8 @@ const optionsContact = [
     {
         icon: Mail,
         title: i18n.CONTACT_PAGE.INFO.OPTIONS.EMAIL,
-        value: "info@snorkeladventuring.com",
-        href: "mailto:info@snorkeladventuring.com",
+        value: "info@snorkelingadventure.com",
+        href: "mailto:info@snorkelingadventure.com",
     },
     {
         icon: MapPin,
@@ -41,14 +42,36 @@ const seoMetaData = {
 ---
 
 <BaseLayout seo={seoMetaData}>
+    {i18n.HOME_PAGE.FAQS.FAQS && (
+        <Schema
+            slot="schema-jsonld"
+            item={{
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: i18n.HOME_PAGE.FAQS.FAQS.map((faq) => ({
+                    "@type": "Question",
+                    name: faq.question,
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: faq.answer,
+                    },
+                })),
+            }}
+        />
+    )}
     <HeroGradient
         title={i18n.CONTACT_PAGE.HERO.TITLE}
         text={i18n.CONTACT_PAGE.HERO.DESCRIPTION}
     />
     <BlockContainer>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
+            <FormContact
+                client:visible
+                i18n={i18n.CONTACT_PAGE.FORM}
+                TITLE_FORM={i18n.CONTACT_PAGE.INFO.TITLE}
+            />
             <div class="py-5">
-                <TagH2>{i18n.CONTACT_PAGE.INFO.TITLE}</TagH2>
+                <TagH2 class="mt-0!">{i18n.CONTACT_PAGE.HERO.TITLE}</TagH2>
                 <TagP>{i18n.CONTACT_PAGE.INFO.DESCRIPTION}</TagP>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {
@@ -87,10 +110,6 @@ const seoMetaData = {
                     }
                 </div>
             </div>
-            <FormContact
-                client:visible
-                i18n={i18n.CONTACT_PAGE.FORM}
-            />
         </div>
     </BlockContainer>
     <FaqsHome />

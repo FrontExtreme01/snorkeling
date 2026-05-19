@@ -3,7 +3,7 @@ import { getI18N } from "@/i18n";
 import { Link, Button } from "@heroui/react";
 import { getLangFromUrl, useTranslations, useTranslatedPath } from "@/i18n/utils";
 import { Facebook, Instagram, Youtube, Tiktok, Tripadvisor, Menu, Close } from "@/icons/allIcons";
-import { Logo } from "@public/img/allImages";
+import { SnorkelingAdventure } from "@/icons/allIcons";
 import LanguageSelector from "./LanguageSelector.astro";
 
 const { currentLocale } = Astro;
@@ -78,7 +78,7 @@ const socialMedia = [
                 aria-label={i18n.ACCESSIBILITY.GO_TO_HOME}
                 class="w-12 hover:scale-95 transition-transform duration-300 mr-auto md:mr-0"
             >
-                <img src={Logo.src} alt={i18n.ACCESSIBILITY.LOGO} class="w-full object-contain" />
+                <SnorkelingAdventure class="h-13 p-0.5" />
             </a>
             <nav class="hidden md:block">
                 <ul class="flex items-center gap-8">
@@ -130,11 +130,7 @@ const socialMedia = [
                 href={translatePath("/")}
                 aria-label={i18n.ACCESSIBILITY.GO_TO_HOME}
             >
-                <img
-                    src={Logo.src}
-                    alt={i18n.ACCESSIBILITY.LOGO}
-                    class="mx-auto block w-auto h-20 hover:scale-95 transition-transform duration-300"
-                />
+                <SnorkelingAdventure class="mx-auto block w-auto h-20 hover:scale-95 transition-transform duration-300" />
             </a>
         </div>
         <ul class="space-y-10 text-center my-20">

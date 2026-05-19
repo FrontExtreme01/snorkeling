@@ -1,5 +1,5 @@
 ---
-import { Swiper, SwiperWrapper, SwiperSlide } from "astro-swiper";
+import { replaceHtmlEntities } from "@/utils/functions";
 import { getCategories } from "@/services/wp";
 
 const categories = await getCategories();
@@ -15,44 +15,25 @@ interface Category {
 
 const { pathCurrent = "blog-home" } = Astro.props;
 ---
-
-<Swiper
-    options={{
-        slidesPerView: "auto",
-        breakpoints: {
-            340: {
-                spaceBetween: 15,
-            },
-            768: {
-                spaceBetween: 25,
-            },
-        },
-    }}
->
-    <SwiperWrapper>
-        <SwiperSlide class="!w-fit">
-            <p class="text-sm">
-                <a
-                    href="/blog/"
-                    class={`inline-flex px-6 md:px-8 py-2 md:py-3 rounded-full ${pathCurrent === "blog-home" ? "bg-cyan-600 hover:bg-cyan-400 font-semibold text-white" : "bg-gray-100 hover:bg-gray-200"} transition-colors duration-300 shadow-md my-2 whitespace-nowrap`}
-                >
-                    All Posts
-                </a>
-            </p>
-        </SwiperSlide>
-        {
-            categories.map((cat: Category) => (
-                <SwiperSlide class="!w-fit">
-                    <p class="text-sm">
-                        <a
-                            href={`/blog/category/${cat.slug}/`}
-                            class={`inline-flex px-6 md:px-8 py-2 md:py-3 rounded-full ${pathCurrent === cat.slug ? "bg-cyan-600 hover:bg-cyan-400 font-semibold text-white" : "bg-gray-100 hover:bg-gray-200"} transition-colors duration-300 shadow-md my-2 whitespace-nowrap`}
-                        >
-                            {cat.name}
-                        </a>
-                    </p>
-                </SwiperSlide>
-            ))
-        }
-    </SwiperWrapper>
-</Swiper>
+<ul class="space-x-4 my-2 flex md:flex-wrap md:justify-center md:items-center overflow-x-scroll md:overflow-auto" style="scrollbar-width: none;">
+    <li class="text-sm">
+        <a
+            href="/blog/"
+            class={`inline-flex px-6 md:px-8 py-2 md:py-3 rounded-full hover:opacity-80 ${pathCurrent === "blog-home" ? "bg-linear-to-br from-sky-700 via-sky-400 to-cyan-500 font-semibold text-white" : "bg-gray-100 hover:bg-gray-200"} transition-colors duration-300 shadow-md my-2 whitespace-nowrap`}
+        >
+            All Posts
+        </a>
+    </li>
+    {
+        categories.map((cat: Category) => (
+                <li class="text-sm">
+                    <a
+                        href={`/blog/category/${cat.slug}/`}
+                        class={`inline-flex px-6 md:px-8 py-2 md:py-3 rounded-full hover:opacity-80 ${pathCurrent === cat.slug ? "bg-linear-to-br from-sky-700 via-sky-400 to-cyan-500 font-semibold text-white" : "bg-gray-100 hover:bg-gray-200"} transition-colors duration-300 shadow-md my-2 whitespace-nowrap`}
+                    >
+                        {replaceHtmlEntities(cat.name)}
+                    </a>
+                </li>
+        ))
+    }
+</ul>

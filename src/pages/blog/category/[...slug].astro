@@ -1,12 +1,11 @@
 ---
 export const prerender = false;
 import { getCategoryBySlug, getPostsByCategoryByPageValidation } from "@/services/wp";
+import { replaceHtmlEntities } from "@/utils/functions";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BlockContainer from "@/components/global/BlockContainer.astro";
 import BlogCategoryCard from "@/components/blog/BlogCategoryCard.astro";
 import SkeletonBlogCard from "@/components/blog/SkeletonBlogCard.astro";
-import TagH1 from "@/components/global/TagH1.astro";
-import TagP from "@/components/global/TagP.astro";
 import PaginationCategoryPosts from "@/components/blog/PaginationCategoryPosts.astro";
 import HeroGradient from "@/components/sections/HeroGradient.astro";
 import CategoriesPosts from "@/components/blog/CategoriesPosts.astro";
@@ -24,13 +23,13 @@ if (!id || !existsPage) {
     return new Response(null, { status: 404 });
 }
 const seoMetaDatos = {
-    title: pageNumber > 1 ? `${name} Archives - Page ${pageNumber} - Snorkeling Adventure` : `${name} Archives - Snorkeling Adventure`,
-    description: pageNumber > 1 ? `Read the articles in our ${name} Archives for your next trip to Cancun and Riviera Maya. Page ${pageNumber}.` : `Read the articles in our ${name} Archives for your next trip to Cancun and Riviera Maya.`,
+    title: pageNumber > 1 ? `${replaceHtmlEntities(name)} Archives - Page ${pageNumber} - Snorkeling Adventure` : `${replaceHtmlEntities(name)} Archives - Snorkeling Adventure`,
+    description: pageNumber > 1 ? `Read the articles in our ${replaceHtmlEntities(name)} Archives for your next trip to Puerto Morelos and Riviera Maya. Page ${pageNumber}.` : `Read the articles in our ${replaceHtmlEntities(name)} Archives for your next trip to Puerto Morelos and Riviera Maya.`,
 };
 
 const dataPosts = {
-    title: pageNumber > 1 ? `${name} Archives - Page ${pageNumber}` : `${name} Archives`,
-    description: id != null ? `Read the articles in our ${name} Archives for your next trip to Cancun and Riviera Maya.` : "",
+    title: pageNumber > 1 ? `${replaceHtmlEntities(name)} Archives - Page ${pageNumber}` : `${replaceHtmlEntities(name)} Archives`,
+    description: id != null ? `Read the articles in our ${replaceHtmlEntities(name)} Archives for your next trip to Puerto Morelos and Riviera Maya.` : "",
 };
 ---
 
@@ -46,16 +45,10 @@ const dataPosts = {
                 Explore Categories
             </p>
             <CategoriesPosts server:defer pathCurrent={slugPartCategory}>
-                <ul
-                    class="space-x-4 my-2 flex overflow-x-scroll animate-pulse scroll-w-none"
-                    style="scrollbar-width: none;"
-                    slot="fallback"
-                >
-                    {
-                        Array.from({ length: 7 }).map(() => (
-                            <li class="w-full h-10 px-20 rounded-full bg-gray-200" />
-                        ))
-                    }
+                <ul class="space-x-4 space-y-2 my-2 flex md:flex-wrap md:justify-center md:items-center overflow-x-scroll md:overflow-auto animate-pulse" style="scrollbar-width: none;" slot="fallback">
+                    {Array.from({ length: 7 }).map(() => (
+                        <li class="px-20 md:px-0 w-60 h-10 rounded-full bg-gray-200"></li>
+                    ))}
                 </ul>
             </CategoriesPosts>
         </div>

@@ -1,15 +1,13 @@
 ---
+import { Image } from "astro:assets";
 import { getI18N } from "@/i18n";
 import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
-import {
-    PrivateSnorkeling,
-    SnorkelingAdventure,
-    Check,
-} from "@/icons/allIcons";
-import BlockContainer from "@/components/global/BlockContainer.astro";
+import { PrivateSnorkeling, SnorkelingAdventure, Check } from "@/icons/allIcons";
+import { Turtle, PrivateBoatSnorkel, CoverSA } from "@public/img/allImages";
 import TagH2 from "@/components/global/TagH2.astro";
-import TagP from "@/components/global/TagP.astro";
 import BtnLinkCustom from "@/components/extras/BtnLinkCustom";
+import VideoHome from "./VideoHome";
+import TagP from "../global/TagP.astro";
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
@@ -19,53 +17,61 @@ const translatePath = useTranslatedPath(lang);
 
 const plans = [
     {
+        title: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.SHARED.TITLE,
+        description: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.SHARED.DESCRIPTION,
+        price: 59,
+        features: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.SHARED.FEATURES,
+        icon: SnorkelingAdventure,
+        img: CoverSA,
+        href: translatePath("/snorkel-adventuring-details/"),
+    },
+    {
         priority: true,
         title: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.PRIVATE.TITLE,
         description: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.PRIVATE.DESCRIPTION,
-        price: 99,
+        price: 115,
         features: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.PRIVATE.FEATURES,
         icon: PrivateSnorkeling,
-        href: translatePath("/private-snorkeling-tour-puerto-morelos/"),
-    },
-    {
-        title: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.SHARED.TITLE,
-        description: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.SHARED.DESCRIPTION,
-        price: 69,
-        features: i18n.HOME_PAGE.CHOOSE_PLAN.PLANS.SHARED.FEATURES,
-        icon: SnorkelingAdventure,
-        href: translatePath("/snorkel-adventuring-details/"),
+        img: PrivateBoatSnorkel,
+        href: translatePath("/private-snorkeling-in-puerto-morelos/"),
     },
 ];
+
+const videoSrc = "VCfDSYqcCW4vUiAvE9HLxNRobPEXicmQLnJ9DgSUi02E";
+const posterImg = "https://image.mux.com/VCfDSYqcCW4vUiAvE9HLxNRobPEXicmQLnJ9DgSUi02E/thumbnail.png?width=214&height=121&time=7"
 ---
 
-<div class="relative">
-    <div
-        class="absolute bottom-0 left-0 w-full h-full bg-linear-to-br from-sky-700 via-cyan-400 to-cyan-600 z-0 mask-radial-[100%_70%] md:mask-radial-[60%_50%] mask-radial-from-100% mask-radial-at-bottom"
-    >
-    </div>
-    <BlockContainer class="relative z-10">
-        <TagH2 class="mx-auto text-center max-w-2xl">
-            {i18n.HOME_PAGE.CHOOSE_PLAN.TITLE}
+<section class="relative pb-20">
+    <div class="absolute inset-0 w-full h-full bg-linear-to-br from-sky-700 via-cyan-400 to-cyan-600 z-5 mask-radial-[110%_85%] md:mask-radial-[100%_75%] mask-radial-from-95% mask-radial-at-top"></div>
+    <div class="absolute inset-0 w-full h-full bg-[url('/assets/img/bg/texture-table-white.webp')] bg-repeat bg-[auto_300px] mask-b-from-95%"></div>
+    <Image
+        src={Turtle}
+        alt={i18n.ACCESSIBILITY.IMAGES.TURTLE}
+        class="absolute z-11 -top-14 md:-top-28 -left-10 md:-left-20 w-40 sm:w-60 lg:w-80 rotate-[12deg]"
+    />
+    <VideoHome client:visible videoSrc={videoSrc} posterImg={posterImg} i18n={i18n.ACCESSIBILITY.VIDEO} />
+    <div class="relative z-11 h-full flex flex-col justify-center items-center text-center pt-10 px-5">
+        <TagH2 class="text-white max-w-2xl mx-auto">
+            {i18n.HOME_PAGE.BEST_SNORKEL.TITLE}
         </TagH2>
-        <TagP class="text-center! max-w-2xl mx-auto">
-            {i18n.HOME_PAGE.CHOOSE_PLAN.DESCRIPTION}
-        </TagP>
-        <div
-            class="grid grid-cols-1 md:grid-cols-2 gap-10 my-15 max-w-4xl mx-auto"
-        >
-            {
-                plans.map((plan) => (
-                    <div
-                        class={`hover:scale-105 transition duration-300 h-fit ${plan.priority ? "bg-linear-to-br from-sky-700 via-cyan-400 to-cyan-600 shadow-[0px_0px_15px_#00B8DB] text-white border border-white" : "bg-white md:mt-10 shadow-lg border border-zinc-200"} rounded-xl px-6 py-10`}
-                    >
-                        <plan.icon class="size-22" />
-                        <h3 class="mt-4 font-semibold text-xl lg:text-2xl">
-                            {plan.title}
+        <TagP class="text-white max-w-3xl" set:html={i18n.HOME_PAGE.BEST_SNORKEL.DESCRIPTION} />
+    </div>
+    <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-5 relative z-11">
+        {
+            plans.map((plan) => (
+                <div class={`${plan.priority ? "border-cyan-500 shadow-lg shadow-cyan-400 bg-linear-to-br from-zinc-400 via-zinc-100 to-zinc-400" : "bg-white border-zinc-200 shadow-lg"} hover:scale-105 transition duration-300 md:mt-10 border rounded-xl relative`}>
+                    <plan.icon class="size-26 absolute top-5 left-5" />
+                    <Image src={plan.img} alt={plan.title} class="w-full h-70 object-cover rounded-2xl p-2.5" />
+                    <div class="px-6 pb-10 pt-5">
+                        <h3 class="mt-4 font-semibold text-xl lg:text-2xl hover:underline">
+                            <a href={plan.href}>
+                                {plan.title}
+                            </a>
                         </h3>
                         <p class="mt-4 text-sm/loose">{plan.description}</p>
-                        <h4 class={`text-4xl font-semibold mt-4`}>
+                        <h4 class="text-4xl font-semibold mt-4">
                             ${plan.price}
-                            <span class={`font-normal text-sm`}>USD</span>
+                            <span class={`text-base md:text-xl`}>USD</span>
                         </h4>
                         <hr
                             class={`my-8 ${plan.priority ? "border-white" : "border-zinc-300"}`}
@@ -74,7 +80,7 @@ const plans = [
                             {plan.features.map((item) => (
                                 <li>
                                     <p class="text-sm lg:text-base">
-                                        <Check class="size-5 inline-block mr-1" />
+                                        <Check class="text-cyan-500 size-5 inline-block mr-1" />
                                         {item}
                                     </p>
                                 </li>
@@ -83,16 +89,14 @@ const plans = [
                         <div class="mt-8">
                             <BtnLinkCustom
                                 client:visible
-                                text={
-                                    i18n.PUERTO_MORELOS_PAGE.CTA_SECTION.BUTTON
-                                }
-                                url={translatePath(plan.href)}
-                                color={plan.priority ? "secondary" : "primary"}
+                                text={i18n.PUERTO_MORELOS_PAGE.CTA_SECTION.BUTTON}
+                                url={plan.href}
+                                color="primary"
                             />
                         </div>
                     </div>
-                ))
-            }
-        </div>
-    </BlockContainer>
-</div>
+                </div>
+            ))
+        }
+    </div>
+</section>

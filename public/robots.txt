@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /thanks
 
-Sitemap: https://snorkelingaventure.vercel.app/sitemap-index.xml
+Sitemap: https://snorkeling.cloudflare.app/sitemap-index.xml

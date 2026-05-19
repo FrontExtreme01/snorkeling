@@ -1,11 +1,8 @@
 import { defineAction, ActionError } from "astro:actions";
-import { z } from "astro/zod";
+import { z } from 'astro/zod';
 import { Resend } from "resend";
-import { getI18N } from "@/i18n";
-import { experimental_AstroContainer } from 'astro/container';
-
+import { experimental_AstroContainer } from "astro/container";
 import AdminMailContact from "@/components/email/AdminMailContact.astro";
-import UserMailContact from "@/components/email/UserMailContact.astro";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
@@ -21,11 +18,9 @@ export const server = {
             lang: z.any(),
         }),
         handler: async (input) => {
-            const i18n = getI18N({ currentLocale: input.lang });
 
             const container = await experimental_AstroContainer.create();
             const subjectAdmin = "Mensaje de contacto - Snorkeling Adventure";
-            const subjectUser = i18n.MAILING.CONTACT_US.SUBJECT;
 
             const emailAdminHtml = await container.renderToString(AdminMailContact,
                 {
@@ -39,26 +34,19 @@ export const server = {
                 }
             );
 
-            const emailUserHtml = await container.renderToString(UserMailContact,
-                {
-                    props: {
-                        fullName: input.fullname,
-                        lang: input.lang
-                    }
-                }
-            );
-            // Send email to user
+            // Send email to Reservations Team
             await resend.emails.send({
                 from: "Snorkeling Adventure <snorkelingadventure@sales.whattodoincancun.com>",
-                to: input.email,
-                subject: subjectUser,
-                replyTo: "frontend.extreme@gmail.com",
-                html: emailUserHtml,
+                to: "reservas@grupo-extreme.com",
+                subject: subjectAdmin,
+                replyTo: input.email,
+                html: emailAdminHtml,
             });
-            // Send email to admin
+            
+            // Send emailto Admin
             const { data, error } = await resend.emails.send({
                 from: "Snorkeling Adventure <snorkelingadventure@sales.whattodoincancun.com>",
-                to: "frontend.extreme@gmail.com",
+                to: "info@snorkelingadventure.com",
                 subject: subjectAdmin,
                 replyTo: input.email,
                 html: emailAdminHtml,

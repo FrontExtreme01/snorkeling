@@ -1,0 +1,13 @@
+---
+import { Schema } from "astro-seo-schema";
+import { siteURL, siteName } from "@/utils/dataGlobal";
+---
+
+<Schema
+    item={{
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: siteName,
+        url: siteURL,
+    }}
+/>

@@ -1,27 +1,52 @@
 ---
+import { Schema } from "astro-seo-schema";
 import { getI18N } from "@/i18n";
+import { getSlides } from "@public/img/hero-carousel/allSlides";
+import { getLangFromUrl } from "@/i18n/utils";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Hero from "@/components/sections/Hero.astro";
+import SlideDesktop from "../sections/SlideDesktop.astro";
 import IntroHome from "@/components/sections/IntroHome.astro";
-import MapMayanReef from "@/components/sections/MapMayanReef.astro";
 import ChoosePlan from "@/components/sections/ChoosePlan.astro";
 import GalleryHome from "@/components/sections/GalleryHome.astro";
 import FaqsHome from "@/components/sections/FaqsHome.astro";
+import SlideMobile from "../sections/SlideMobile.astro";
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
+
+const lang = getLangFromUrl(Astro.url);
+
+const slides: any = getSlides(lang);
 
 const seoMetaData = {
     title: i18n.SEO.HOME_PAGE.TITLE,
     description: i18n.SEO.HOME_PAGE.DESCRIPTION,
     metaTitle: i18n.SEO.HOME_PAGE.META_TITLE,
+    image: slides.mobile[0].img.src
 };
 ---
 
 <BaseLayout seo={seoMetaData}>
-    <Hero />    
+    {i18n.HOME_PAGE.FAQS.FAQS && (
+        <Schema
+            slot="schema-jsonld"
+            item={{
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: i18n.HOME_PAGE.FAQS.FAQS.map((faq) => ({
+                    "@type": "Question",
+                    name: faq.question,
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: faq.answer,
+                    },
+                })),
+            }}
+        />
+    )}
+    <SlideDesktop slides={slides.desktop} />
+    <SlideMobile slides={slides.mobile} />
     <IntroHome />
-    <MapMayanReef />
     <ChoosePlan />
     <GalleryHome />
     <FaqsHome />

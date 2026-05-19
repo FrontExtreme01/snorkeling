@@ -2,17 +2,19 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import HeroGradient from "@/components/sections/HeroGradient.astro";
 import BlockContainer from "@/components/global/BlockContainer.astro";
-import Posts from "@/components/blog/Posts";
+import BlogCard from "@/components/blog/BlogCard.astro";
+import SkeletonBlogCard from "@/components/blog/SkeletonBlogCard.astro";
+import PaginationPosts from "@/components/blog/PaginationPosts.astro";
+import CategoriesPosts from "@/components/blog/CategoriesPosts.astro";
 
 const seoMetaDatos = {
-    title: "Snorkeling Adventure - Blog",
-    description:
-        "Get more information in our Blog for your next trip to Cancun and Riviera Maya. Any doubt you have, we will offer the answer.",
+    title: "Explore Our Blog - Snorkeling Adventure",
+    description: "Discover tips, stories, and insights for your next snorkeling adventure in Puerto Morelos and the Riviera Maya.",
 };
 
 const dataPosts = {
-    title: "Snorkeling Adventure - Blog",
-    description: "Get more information in our Blog for your next trip to Cancun and Riviera Maya. Any doubt you have, we will offer the answer.",
+    title: "Discover a World of Snorkeling Adventures in Puerto Morelos",
+    description: "Discover tips, stories, and insights for your next snorkeling adventure in Puerto Morelos and the Riviera Maya.",
 };
 ---
 
@@ -23,12 +25,29 @@ const dataPosts = {
     />
     <BlockContainer>
         <!-- Categories -->
-        <div class="w-full md:w-4/5 mx-auto">
+        <div class="w-full lg:w-4/5 mx-auto">
             <p class="text-lg mb-10 text-center! font-semibold">Explore Categories</p>
+            <CategoriesPosts server:defer pathCurrent="blog-home">
+                <ul class="space-x-4 space-y-2 my-2 flex md:flex-wrap md:justify-center md:items-center overflow-x-scroll md:overflow-auto animate-pulse" style="scrollbar-width: none;" slot="fallback">
+                    {Array.from({ length: 7 }).map(() => (
+                        <li class="px-20 md:px-0 w-60 h-10 rounded-full bg-gray-200"></li>
+                    ))}
+                </ul>
+            </CategoriesPosts>
         </div>
         <!-- Posts -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
-            <Posts client:load />
+            <BlogCard server:defer>
+                {
+                    Array.from({ length: 12 }).map(() => (
+                        <SkeletonBlogCard slot="fallback" />
+                    ))
+                }
+            </BlogCard>
+        </div>
+        <!-- Pagination -->
+        <div class="mt-10">
+            <PaginationPosts server:defer />
         </div>
     </BlockContainer>
 </BaseLayout>

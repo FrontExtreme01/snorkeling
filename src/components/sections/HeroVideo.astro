@@ -1,0 +1,65 @@
+---
+import { getI18N } from "@/i18n";
+import { User1, User2, User3 } from "@public/img/allImages";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import TagH1 from "@/components/global/TagH1.astro";
+import DetailVideo from "./DetailVideo";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+interface Props {
+    title: string;
+    priceFrom: number;
+    videoSrc: string;
+    posterImg: string;
+    reviews: string;
+};
+
+const { title, videoSrc, posterImg, reviews } = Astro.props;
+---
+<section class="min-h-150 md:min-h-180 relative overflow-hidden mask-b-from-95%">
+    <DetailVideo
+        client:load
+        videoSrc={videoSrc}
+        posterImg={posterImg}
+        titleVideo={title}
+        buttonLabel={i18n.ACCESSIBILITY.VIDEO.PLAY_PAUSE}
+    />
+    <BlockContainer class="relative !mt-0">
+        <div class="py-20 max-w-3xl mx-auto">
+            <TagH1 class="text-center text-white text-shadow-lg/10">
+                {title}
+            </TagH1>
+            <div class="w-fit mx-auto flex flex-wrap items-center justify-center gap-3 p-1.5 pr-4 mt-10 rounded-full border border-slate-300 bg-white">
+                <div class="flex items-center -space-x-3">
+                    <img
+                        class="size-7 rounded-full border-2 border-white"
+                        height={50}
+                        width={50}
+                        src={User1.src}
+                        alt=""
+                    />
+                    <img
+                        class="size-7 rounded-full border-2 border-white"
+                        height={50}
+                        width={50}
+                        src={User2.src}
+                        alt=""
+                    />
+                    <img
+                        class="size-7 rounded-full border-2 border-white"
+                        height={50}
+                        width={50}
+                        src={User3.src}
+                        alt=""
+                    />
+                </div>
+                <p class="text-xs">
+                    {reviews}
+                    {i18n.ACCESSIBILITY.PEOPLE_ENJOYED}
+                </p>
+            </div>
+        </div>
+    </BlockContainer>
+</section>

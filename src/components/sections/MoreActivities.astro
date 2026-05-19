@@ -7,7 +7,7 @@ import {
     CityTacoTour,
 } from "@public/img/allImages";
 import { Swiper, SwiperWrapper, SwiperSlide } from "astro-swiper";
-import { BtnNext, BtnPrev, ExternalLink } from "@/icons/allIcons";
+import { ExternalLink } from "@/icons/allIcons";
 import TagH2 from "@/components/global/TagH2.astro";
 import TagP from "@/components/global/TagP.astro";
 
@@ -27,7 +27,7 @@ const activities = [
     },
     {
         image: CityTacoTour,
-        title: "City Taco Tour",
+        title: "Beach Taco Tour",
         link: "https://extremeadventurecancun.com/city-taco-tour-puerto-morelos/",
     },
 ];
@@ -88,7 +88,7 @@ const activities = [
                                             alt={activity.title}
                                         />
                                         <a href={activity.link} target="_blank">
-                                            <div class="rounded-full px-3 py-1 bg-white hover:bg-zinc-200 transition-colors duration-200 absolute bottom-3 left-4 flex gap-2 items-center">
+                                            <div class="rounded-full px-3 py-1 bg-white hover:bg-zinc-200 transition-colors duration-300 absolute bottom-3 left-4 flex gap-2 items-center">
                                                 <div class="size-7 rounded-full bg-sky-600 grid place-items-center">
                                                     <ExternalLink class="size-4 text-white" />
                                                 </div>

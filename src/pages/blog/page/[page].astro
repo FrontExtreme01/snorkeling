@@ -18,12 +18,12 @@ if (!existsPage) {
 }
 
 const seoMetaDatos = {
-    title: `Snorkeling Adventure - Page ${pageNumber}`,
+    title: `Explore Our Blog - Snorkeling Adventure - Page ${pageNumber}`,
     description: `Get more information in our Blog for your next trip to Cancun and Riviera Maya. Any doubt you have, we will offer the answer. Page ${pageNumber}.`,
 };
 
 const dataPosts = {
-    title: `Snorkeling Adventure - Page ${pageNumber}`,
+    title: `Discover a World of Snorkeling Adventures in Puerto Morelos - Page ${pageNumber}`,
     description:
         "Get more information in our Blog for your next trip to Cancun and Riviera Maya. Any doubt you have, we will offer the answer.",
 };
@@ -38,16 +38,10 @@ const dataPosts = {
                 Explore Categories
             </p>
             <CategoriesPosts server:defer pathCurrent="blog-home">
-                <ul
-                    class="space-x-4 my-2 flex overflow-x-scroll animate-pulse scroll-w-none"
-                    style="scrollbar-width: none;"
-                    slot="fallback"
-                >
-                    {
-                        Array.from({ length: 7 }).map(() => (
-                            <li class="w-full h-10 px-20 rounded-full bg-gray-200" />
-                        ))
-                    }
+                <ul class="space-x-4 space-y-2 my-2 flex md:flex-wrap md:justify-center md:items-center overflow-x-scroll md:overflow-auto animate-pulse" style="scrollbar-width: none;" slot="fallback">
+                    {Array.from({ length: 7 }).map(() => (
+                        <li class="px-20 md:px-0 w-60 h-10 rounded-full bg-gray-200"></li>
+                    ))}
                 </ul>
             </CategoriesPosts>
         </div>

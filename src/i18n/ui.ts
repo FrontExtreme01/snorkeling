@@ -22,7 +22,8 @@ export const ui = {
         'nav.mayanReef': 'Mayan Reef',
         'nav.puertoMorelos': 'Puerto Morelos',
         'nav.contact': 'Contact',
-        'footer.terms': 'Privacy',
+        'footer.regularSnorkel': 'Snorkeling Adventure',
+        'footer.privateSnorkel': 'Private Snorkeling',
         'footer.design': 'Design by Grupo Extreme',
     },
     es: {
@@ -30,7 +31,8 @@ export const ui = {
         'nav.mayanReef': 'Arrecife Maya',
         'nav.puertoMorelos': 'Puerto Morelos',
         'nav.contact': 'Contacto',
-        'footer.terms': 'Privacidad',
+        'footer.regularSnorkel': 'Snorkeling Adventure',
+        'footer.privateSnorkel': 'Snorkel Privado',
         'footer.design': 'Diseñado por Grupo Extreme',
     }
 } as const;

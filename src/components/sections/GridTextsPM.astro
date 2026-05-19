@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import BlockContainer from "@/components/global/BlockContainer.astro";
 import { FaroInclinado } from "@public/img/allImages"
 import TagH3 from "@/components/global/TagH3.astro";
@@ -12,8 +13,8 @@ const i18n = getI18N({ currentLocale });
 <BlockContainer>
     <div class="grid grid-cols-1 lg:grid-cols-9 lg:grid-rows-2 gap-5">
         <div class="bg-sky-100 rounded-lg lg:col-span-5 relative">
-            <img src={FaroInclinado.src} alt={i18n.ACCESSIBILITY.IMAGES.FARO_INCLINADO} class="absolute top-0 right-0 w-fit h-full object-cover rounded-lg" />
-            <div class="p-10 z-10 relative">
+            <Image src={FaroInclinado} alt={i18n.ACCESSIBILITY.IMAGES.FARO_INCLINADO} class="lg:absolute top-0 right-0 mx-auto w-60 lg:w-fit lg:h-full object-cover rounded-lg" />
+            <div class="p-10 z-10 relative max-w-lg">
                 <TagH3>{i18n.PUERTO_MORELOS_PAGE.WHERE_IS_PUERTO_MORELOS.TITLE}</TagH3>
                 <TagP set:html={i18n.PUERTO_MORELOS_PAGE.WHERE_IS_PUERTO_MORELOS.DESCRIPTION} />
             </div>

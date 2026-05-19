@@ -31,23 +31,26 @@ const posts: Post[] = await getPostsByPage({ page });
                     <img
                         src={post.featuredImage}
                         alt={replaceHtmlEntities(post.title)}
-                        class="rounded-xl w-full object-cover"
+                        class="rounded-xl w-full object-cover aspect-3/2"
                     />
                 </a>
             </div>
             <div class="mt-10 text-center">
                 <div class="flex flex-wrap justify-center gap-2 mb-4">
-                    {post.categories.map((category) => (
-                        <p class="bg-cyan-600 text-white px-2 py-1 rounded-full font-semibold text-xs md:text-sm hover:underline">
-                            <a
-                                href={`/blog/category/${category.slug}/`}
-                                aria-label={
-                                    "View all posts of " + category.name
-                                }
-                            >
-                                {category.name}
-                            </a>
-                        </p>
+                    {post.categories.map((category, i) => (
+                        <span class="inline-flex items-center gap-2">
+                            <p class="text-cyan-600 font-semibold text-xs md:text-sm hover:underline m-0">
+                                <a
+                                    href={`/blog/category/${category.slug}/`}
+                                    aria-label={`View all posts of ${replaceHtmlEntities(category.name)}`}
+                                >
+                                    {replaceHtmlEntities(category.name)}
+                                </a>
+                            </p>
+                            {i < post.categories.length - 1 && (
+                                <span class="text-cyan-600">&bull;</span>
+                            )}
+                        </span>
                     ))}
                 </div>
                 <h2 class="text-lg md:text-xl font-semibold mb-4 group">

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { actions } from "astro:actions";
-import { Form, Input, Textarea, Button, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@heroui/react";
+import { Form, Input, Textarea, Button, Modal, ModalContent, ModalBody, useDisclosure } from "@heroui/react";
 
 interface FormContactProps {
+    TITLE_FORM: string;
     i18n: {
         CLOSE_MODAL: string,
         LABELS: {
@@ -41,7 +42,7 @@ interface FormContactProps {
     };
 }
 
-export default function FormContact({ i18n }: FormContactProps) {
+export default function FormContact({ i18n, TITLE_FORM }: FormContactProps) {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -65,7 +66,8 @@ export default function FormContact({ i18n }: FormContactProps) {
     };
 
     return (
-        <>
+        <div>
+            <h2 className="text-xl/normal lg:text-3xl/relaxed font-bold mt-5">{TITLE_FORM}</h2>
             <Form onSubmit={handleSubmit}>
                 <div className="flex flex-wrap py-5 space-y-8">
                     <Input
@@ -162,17 +164,6 @@ export default function FormContact({ i18n }: FormContactProps) {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">
-                                {isError ? (
-                                    <>
-                                        <h2 className="text-2xl font-semibold"> {i18n.ERROR_FORM.TITLE} </h2>
-                                    </>
-                                ) : (
-                                    <>
-                                        <h2 className="text-2xl font-semibold"> {i18n.SUCCESS_FORM.TITLE} </h2>
-                                    </>
-                                )}
-                            </ModalHeader>
                             <ModalBody>
                                 <div className="py-4 text-center">
                                     {isError ? (
@@ -203,6 +194,6 @@ export default function FormContact({ i18n }: FormContactProps) {
                     )}
                 </ModalContent>
             </Modal>
-        </>
+        </div>
     )
 }

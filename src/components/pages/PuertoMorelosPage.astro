@@ -1,4 +1,5 @@
 ---
+import { Schema } from "astro-seo-schema";
 import { getI18N } from "@/i18n";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import HeroGradient from "@/components/sections/HeroGradient.astro";
@@ -18,6 +19,23 @@ const seoMetaData = {
 ---
 
 <BaseLayout seo={seoMetaData}>
+    {i18n.HOME_PAGE.FAQS.FAQS && (
+        <Schema
+            slot="schema-jsonld"
+            item={{
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: i18n.HOME_PAGE.FAQS.FAQS.map((faq) => ({
+                    "@type": "Question",
+                    name: faq.question,
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: faq.answer,
+                    },
+                })),
+            }}
+        />
+    )}
     <HeroGradient
         title={i18n.PUERTO_MORELOS_PAGE.HERO.TITLE}
         text={i18n.PUERTO_MORELOS_PAGE.HERO.DESCRIPTION}

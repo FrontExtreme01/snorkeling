@@ -1,34 +1,28 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  site: 'https://snorkelingadventure.vercel.app',
-  adapter: node({
-    mode: 'standalone'
-  }),
+  site: "https://snorkeling.cloudflare.app",
   output: 'static',
-  server: {
-    host: true
-  },
   trailingSlash: 'always',
-  integrations: [react(), mdx(), sitemap({
-    i18n: {
-      defaultLocale: 'en', 
-      locales: {
-        en: 'en-US',
-        es: 'es-ES',
-      }
-    },
-    filter: (page) =>
-      !page.includes('/thanks') &&
-      !page.includes('/form-error') &&
-      !page.includes('/form-success')
-  })],
+  integrations: [
+    react(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en-US',
+          es: 'es-ES',
+        }
+      },
+      filter: (page) =>
+        !page.includes('/thanks')
+    })],
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es'],
@@ -39,4 +33,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+  adapter: cloudflare()
 });

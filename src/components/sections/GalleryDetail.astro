@@ -6,12 +6,15 @@ import TagP from "@/components/global/TagP.astro";
 interface Props {
     title: string;
     description: string;
+    images: {
+        src: string;
+    }[];
 }
 
-const { title, description } = Astro.props;
+const { title, description, images } = Astro.props;
 ---
 
-<section class="mt-20">
+<section>
     <div class="max-w-2xl mx-auto px-5">
         <TagH2 class="text-center">{title}</TagH2>
         <TagP class="md:text-center!">{description}</TagP>
@@ -20,100 +23,100 @@ const { title, description } = Astro.props;
         <div
             class="rounded-lg col-span-3 lg:col-auto"
             data-fancybox="gallery"
-            data-src="/assets/img/gallery/1.webp"
+            data-src={images[0].src}
         >
             <img
                 class="rounded-lg w-full h-full object-cover"
                 alt="Snorkeling Adventure Image 1"
-                src="/assets/img/gallery/1.webp"
+                src={images[0].src}
             />
         </div>
         <div
             class="rounded-lg col-span-2 row-start-2 lg:row-start-auto lg:col-auto"
             data-fancybox="gallery"
-            data-src="/assets/img/gallery/2.webp"
+            data-src={images[1].src}
         >
             <img
                 class="rounded-lg w-full h-full object-cover"
                 alt="Snorkeling Adventure Image 2"
-                src="/assets/img/gallery/2.webp"
+                src={images[1].src}
             />
         </div>
         <div
             class="rounded-lg col-start-3 row-start-2 lg:col-span-2 lg:row-span-2"
             data-fancybox="gallery"
-            data-src="/assets/img/gallery/3.webp"
+            data-src={images[2].src}
         >
             <img
                 class="rounded-lg w-full h-full object-cover"
                 alt="Snorkeling Adventure Image 3"
-                src="/assets/img/gallery/3.webp"
+                src={images[2].src}
             />
         </div>
         <div
             class="rounded-lg row-start-3 lg:col-span-2 lg:row-span-2 lg:row-start-2"
             data-fancybox="gallery"
-            data-src="/assets/img/gallery/4.webp"
+            data-src={images[3].src}
         >
             <img
                 class="rounded-lg w-full h-full object-cover"
                 alt="Snorkeling Adventure Image 4"
-                src="/assets/img/gallery/4.webp"
+                src={images[3].src}
             />
         </div>
         <div
             class="rounded-lg col-span-2 lg:col-auto lg:col-start-3 row-start-3"
             data-fancybox="gallery"
-            data-src="/assets/img/gallery/5.webp"
+            data-src={images[4].src}
         >
             <img
                 class="rounded-lg w-full h-full object-cover"
                 alt="Snorkeling Adventure Image 5"
-                src="/assets/img/gallery/5.webp"
+                src={images[4].src}
             />
         </div>
         <div
             class="rounded-lg col-span-3 lg:col-auto lg:col-start-4 row-start-4 lg:row-start-3"
             data-fancybox="gallery"
-            data-src="/assets/img/gallery/6.webp"
+            data-src={images[5].src}
         >
             <img
                 class="rounded-lg w-full h-full object-cover"
                 alt="Snorkeling Adventure Image 6"
-                src="/assets/img/gallery/6.webp"
+                src={images[5].src}
             />
         </div>
         <div
             class="rounded-lg col-span-2 lg:col-auto lg:row-span-2 row-start-5 lg:row-start-4"
             data-fancybox="gallery"
-            data-src="/assets/img/gallery/7.webp"
+            data-src={images[6].src}
         >
             <img
                 class="rounded-lg w-full h-full object-cover"
                 alt="Snorkeling Adventure Image 7"
-                src="/assets/img/gallery/7.webp"
+                src={images[6].src}
             />
         </div>
         <div
             class="rounded-lg col-start-3 lg:col-auto lg:row-span-2 row-start-5 lg:row-start-4"
             data-fancybox="gallery"
-            data-src="/assets/img/gallery/8.webp"
+            data-src={images[7].src}
         >
             <img
                 class="rounded-lg w-full h-full object-cover"
                 alt="Snorkeling Adventure Image 8"
-                src="/assets/img/gallery/8.webp"
+                src={images[7].src}
             />
         </div>
         <div
             class="rounded-lg col-span-3 lg:col-span-2 lg:row-span-2 row-start-6 lg:row-start-4"
             data-fancybox="gallery"
-            data-src="/assets/img/gallery/9.webp"
+            data-src={images[8].src}
         >
             <img
                 class="rounded-lg w-full h-full object-cover"
                 alt="Snorkeling Adventure Image 9"
-                src="/assets/img/gallery/9.webp"
+                src={images[8].src}
             />
         </div>
     </div>

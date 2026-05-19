@@ -1,4 +1,4 @@
-[![Abrir sitio web][ea-badge]][ea-url]
+[![Abrir sitio web][sa-badge]][sa-url]
 
 # 🚀 Estructura del Proyecto
 
@@ -132,7 +132,7 @@ Dentro de este archivo se define toda la configuración global que tendra el pro
 [![Tailwind CSS][tailwind-badge]][tailwind-url] 
 [![React JS][react-badge]][react-url]  
 
-[sa-badge]: http://snorkeladventuring.com/assets/img/logo-snorkel.png
+[sa-badge]: https://snorkeladventuring.com/assets/img/logo-snorkel.png
 [sa-url]: https://snorkeladventuring.com/
 [astro-url]: https://astro.build/
 [astro-badge]: https://img.shields.io/badge/Astro-fff?style=for-the-badge&logo=astro&logoColor=bd303a&color=352563

@@ -1,0 +1,411 @@
+---
+import { getI18N } from "@/i18n";
+import { PMAereal, MujerSalvavidas, PersonOkSnorkel, CoverSA } from "@public/img/allImages";
+import { FlipFlop, Towel, Cash, Swimwear, Clock, UserUp, CalendarTime, Bus, Ticket, BtnNext } from "@/icons/allIcons";
+import { Exclamation, Check, Close, Star } from "@/icons/allIcons"
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlockContainer from "@/components/global/BlockContainer.astro";
+import HeroVideo from "@/components/sections/HeroVideo.astro";
+import BtnModalBokun from "@/components/extras/BtnModalBokun";
+import GalleryDetail from "@/components/sections/GalleryDetail.astro";
+import MoreActivities from "@/components/sections/MoreActivities.astro";
+import TagH2 from "@/components/global/TagH2.astro";
+import TagH3 from "@/components/global/TagH3.astro";
+import TagP from "@/components/global/TagP.astro";
+import Faqs from "@/components/extras/Faqs";
+import AccordionComponent from "@/components/sections/AccordionComponent";
+import { Schema } from "astro-seo-schema";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const priceFrom = 59;
+const countStars = 4.8;
+const duration = 4;
+const minimumAge = 6;
+const reviewsCount = "1.2k";
+const reviewsNumber = 1236;
+const videoSrc = "VCfDSYqcCW4vUiAvE9HLxNRobPEXicmQLnJ9DgSUi02E";
+const posterImg = "https://image.mux.com/VCfDSYqcCW4vUiAvE9HLxNRobPEXicmQLnJ9DgSUi02E/thumbnail.png?height=121&width=214"
+
+const imagesGlob = import.meta.glob('@public/img/gallery/snorkeling-adventure/*.webp', { eager: true });
+const images = Object.values(imagesGlob).map((img: any) => img.default);
+
+const siteWebURL = new URL(Astro.url.pathname, Astro.site);
+
+const dataForm = {
+    bookingChannel: "e17819cf-e2f5-4ea6-83ab-c37adaf3faa1",
+    idCalendar: "887245",
+    title: i18n.DETAIL_PAGE.REGULAR_SNORKELING.FORM_FLOATER.TITLE,
+    btnBook: i18n.DETAIL_PAGE.REGULAR_SNORKELING.FORM_FLOATER.BUTTON_BOOK,
+    btnCloseText: i18n.DETAIL_PAGE.REGULAR_SNORKELING.FORM_FLOATER.BUTTON_CLOSE 
+}
+
+const seoMetaData = {
+    title: i18n.SEO.DETAIL_PAGE.REGULAR_SNORKELING.TITLE,
+    description: i18n.SEO.DETAIL_PAGE.REGULAR_SNORKELING.DESCRIPTION,
+    metaTitle: i18n.SEO.DETAIL_PAGE.REGULAR_SNORKELING.META_TITLE,
+    image: CoverSA.src
+};
+---
+
+
+<BaseLayout seo={seoMetaData}>
+    {i18n.DETAIL_PAGE.REGULAR_SNORKELING.FAQS.FAQS && (
+        <Schema
+            slot="schema-jsonld"
+            item={{
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: i18n.DETAIL_PAGE.REGULAR_SNORKELING.FAQS.FAQS.map((faq) => ({
+                    "@type": "Question",
+                    name: faq.question,
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: faq.answer,
+                    },
+                })),
+            }}
+        />
+    )}
+    <Schema
+        slot="schema-jsonld"
+        item={{
+            "@context": "https://schema.org",
+            "@type": "TouristAttraction",
+            name: i18n.DETAIL_PAGE.REGULAR_SNORKELING.HERO.TITLE,
+            description: i18n.SEO.DETAIL_PAGE.REGULAR_SNORKELING.DESCRIPTION,
+            image: `${siteWebURL.origin}${CoverSA.src}`,
+            url: siteWebURL.href,
+            availableLanguage: [
+                {
+                        "@type": "Language",
+                        "name": "Spanish"
+                },
+                {
+                        "@type": "Language",
+                        "name": "English"
+                }
+            ]
+        }}
+    />
+    <Schema
+        slot="schema-jsonld"
+        item={{
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: i18n.DETAIL_PAGE.REGULAR_SNORKELING.HERO.TITLE,
+            description: i18n.SEO.DETAIL_PAGE.REGULAR_SNORKELING.DESCRIPTION,
+            image: `${siteWebURL.origin}${CoverSA.src}`,
+            offers: {
+                "@type": "Offer",
+                price: priceFrom,
+                priceCurrency: "USD",
+                availability: "InStock",
+                url: siteWebURL.href,
+            },
+            brand: {
+                "@type": "Brand",
+                name: "Snorkeling Adventure",
+            },
+            aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: countStars,
+                reviewCount: reviewsNumber,
+            } 
+        }}
+    />
+    <Schema
+        slot="schema-jsonld"
+        item={{
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: siteWebURL.origin,
+                },
+                {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: i18n.DETAIL_PAGE.REGULAR_SNORKELING.HERO.TITLE,
+                    item: siteWebURL.href,
+                }
+            ],
+        }}
+    />
+    <!-- Hero -->
+    <HeroVideo
+        title={i18n.DETAIL_PAGE.REGULAR_SNORKELING.HERO.TITLE}
+        priceFrom={priceFrom}
+        videoSrc={videoSrc}
+        posterImg={posterImg}
+        reviews={reviewsCount}
+    />
+    <h2 class="text-xl/relaxed px-4 lg:text-3xl/relaxed font-bold max-w-3xl mx-auto text-center [&_span]:bg-linear-to-br [&_span]:from-sky-700 [&_span]:via-cyan-400 [&_span]:to-cyan-600 [&_span]:bg-clip-text [&_span]:text-transparent py-20" set:html={i18n.DETAIL_PAGE.REGULAR_SNORKELING.HERO.DESCRIPTION} />
+    <div class="max-w-5xl mx-auto px-5">
+        <!-- General Information -->
+        <div class="w-full">
+            <ul
+                class="grid grid-cols-2 md:grid-cols-4 gap-5 place-items-center"
+            >
+                <li class="grid place-items-center">
+                    <div
+                        class="size-16 md:size-24 rounded-full bg-sky-100 overflow-hidden grid place-items-center"
+                    >
+                        <Clock class="size-8 md:size-12 inline-block stroke-1" />
+                    </div>
+                    <TagP class="!text-center">
+                        <span class="font-semibold">
+                            {i18n.DETAIL_PAGE.GENERAL.DURATION}
+                        </span>
+                        <br />
+                        {duration} {i18n.DETAIL_PAGE.GENERAL.HOURS} ({i18n.DETAIL_PAGE.GENERAL.APPROX})
+                    </TagP>
+                </li>
+                <li class="grid place-items-center">
+                    <div
+                        class="size-16 md:size-24 rounded-full bg-sky-100 overflow-hidden grid place-items-center"
+                    >
+                        <UserUp class="size-8 md:size-12 inline-block stroke-1" />
+                    </div>
+                    <TagP class="!text-center">
+                        <span class="font-semibold">
+                            {i18n.DETAIL_PAGE.GENERAL.AGE_REQUIREMENT}
+                        </span>
+                        <br />
+                        {minimumAge + " " + i18n.DETAIL_PAGE.GENERAL.YEARS_AND_OLDER}
+                    </TagP>
+                </li>
+                <li class="grid place-items-center">
+                    <div
+                        class="size-16 md:size-24 rounded-full bg-sky-100 overflow-hidden grid place-items-center"
+                    >
+                        <CalendarTime
+                            class="size-8 md:size-12 inline-block stroke-1"
+                        />
+                    </div>
+                    <TagP class="!text-center">
+                        <span class="font-semibold">
+                            {i18n.DETAIL_PAGE.GENERAL.SCHEDULE}
+                        </span>
+                        <br />
+                        {i18n.DETAIL_PAGE.REGULAR_SNORKELING.SCHEDULES.SCHEDULE_LIST.join(" | ")}
+                    </TagP>
+                </li>
+                <li class="grid place-items-center">
+                    <div
+                        class="size-16 md:size-24 rounded-full bg-sky-100 overflow-hidden grid place-items-center"
+                    >
+                        <Bus class="size-8 md:size-12 inline-block stroke-1" />
+                    </div>
+                    <TagP class="!text-center">
+                        <span class="font-semibold"
+                            >{i18n.DETAIL_PAGE.GENERAL.TRANSPORTATION}</span
+                        >
+                        <br />
+                        {i18n.DETAIL_PAGE.GENERAL.ROUNDTRIP_TRANSPORTATION}
+                    </TagP>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <BlockContainer>
+        <!-- Texts Puerto Morelos -->
+        <div class="grid items-center grid-cols-1 lg:grid-cols-2 gap-10 mb-10 lg:mb-20">
+            <img src={PMAereal.src} alt={i18n.ACCESSIBILITY.IMAGES.PUERTO_MORELOS_AEREAL} class="object-cover w-full h-full rounded-lg" />
+            <div class="lg:p-10">
+                <TagH2>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.TEXTS.EXPLORE_PUERTO_MORELOS.TITLE}</TagH2>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.TEXTS.EXPLORE_PUERTO_MORELOS.DESCRIPTION}</TagP>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.TEXTS.SNORKELING_EXPERIENCE.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.TEXTS.SNORKELING_EXPERIENCE.DESCRIPTION}</TagP>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.TEXTS.DIVE_INTO_UNSEEN.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.TEXTS.DIVE_INTO_UNSEEN.DESCRIPTION}</TagP>
+            </div>
+        </div>
+        <!-- Inclusions -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
+            <AccordionComponent
+                client:visible
+                title={i18n.DETAIL_PAGE.REGULAR_SNORKELING.INCLUSIONS.TITLE}
+            >
+                <ul class="mt-10 space-y-3 gap-12 text-base/loose text-justify sm:columns-2">
+                    {i18n.DETAIL_PAGE.REGULAR_SNORKELING.INCLUSIONS.INCLUDES.map((item) => (
+                        <li>
+                            <p><Check class="size-5 text-green-600 inline-block mr-2" />{item}</p>
+                        </li>
+                    ))}
+                    {i18n.DETAIL_PAGE.REGULAR_SNORKELING.INCLUSIONS.NOT_INCLUDES.map((item) => (
+                        <li>
+                            <p><Close class="size-5 text-red-600 inline-block mr-2" />{item}</p>
+                        </li>
+                    ))}
+                </ul>
+            </AccordionComponent>
+            <img
+                src={PersonOkSnorkel.src}
+                alt={i18n.ACCESSIBILITY.IMAGES.LIFEGUARD_WOMAN}
+                class="hidden lg:block w-5/6 mx-auto object-cover rounded-lg shadow-lg"
+            />
+        </div>
+        <!-- What You Should Know -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
+            <div class="row-start-2 lg:row-auto">
+                <img
+                    src={MujerSalvavidas.src}
+                    alt={i18n.ACCESSIBILITY.IMAGES.LIFEGUARD_WOMAN}
+                    class="w-full object-cover mask-[url('/assets/img/extras/shape-splash.webp')] mask-center mask-no-repeat mask-contain"
+                />
+                <!-- Safety Standards -->
+                <div class="grid sm:grid-cols-2 place-items-center gap-10 lg:col-span-4">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-amber-300 rounded-full">
+                            <Exclamation class="size-5 text-black" />
+                        </div>
+                        <p class="text-sm/loose font-semibold text-justify">{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.SAFETY_STANDARDS.LIFEJACKET}</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-amber-300 rounded-full">
+                            <Exclamation class="size-5 text-black" />
+                        </div>
+                        <p class="text-sm/loose font-semibold text-justify">{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.SAFETY_STANDARDS.KICKING}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row-start-1 lg:row-auto">
+                <AccordionComponent
+                    client:visible
+                    title={i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.TITLE}
+                >
+                    <ul class="mt-10 list-disc list-inside space-y-3 text-base/loose text-justify">
+                        {i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_YOU_SHOULD_KNOW.LIST.map((item) => (
+                            <li>{item}</li>
+                        ))}
+                    </ul>
+                </AccordionComponent>
+            </div>
+        </div>
+        <!-- What You Bring -->
+        <TagH2 class="text-center max-w-2xl mx-auto mb-10">
+            {i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.TITLE}
+        </TagH2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-sky-100 rounded-lg p-7">
+                <div class="rounded-full p-5 bg-white w-fit">
+                    <Swimwear class="size-10 text-sky-500" />
+                </div>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.SWIMSUIT.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.SWIMSUIT.DESCRIPTION}</TagP>
+            </div>
+            <div class="bg-sky-100 rounded-lg p-7">
+                <div class="rounded-full p-5 bg-white w-fit">
+                    <Towel class="size-10 text-sky-500" />
+                </div>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.TOWEL.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.TOWEL.DESCRIPTION}</TagP>
+            </div>
+            <div class="bg-sky-100 rounded-lg p-7">
+                <div class="rounded-full p-5 bg-white w-fit">
+                    <FlipFlop class="size-10 text-sky-500" />
+                </div>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.WATER_SANDALS.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.WATER_SANDALS.DESCRIPTION}</TagP>
+            </div>
+            <div class="bg-sky-100 rounded-lg p-7">
+                <div class="rounded-full p-5 bg-white w-fit">
+                    <Cash class="size-10 text-sky-500" />
+                </div>
+                <TagH3>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.CASH.TITLE}</TagH3>
+                <TagP>{i18n.DETAIL_PAGE.REGULAR_SNORKELING.WHAT_TO_BRING.CASH.DESCRIPTION}</TagP>
+            </div>
+        </div>
+    </BlockContainer>
+    <!-- Gallery -->
+    <GalleryDetail
+        title={i18n.DETAIL_PAGE.REGULAR_SNORKELING.GALLERY.TITLE}
+        description={i18n.DETAIL_PAGE.REGULAR_SNORKELING.GALLERY.DESCRIPTION}
+        images={images}
+    />
+    <!-- Faqs -->
+    <BlockContainer>
+        <TagH2 class="text-center max-w-2xl mx-auto mb-10 mt-10">
+            {i18n.DETAIL_PAGE.REGULAR_SNORKELING.FAQS.TITLE}
+        </TagH2>
+        <div class="max-w-4xl mx-auto">
+            <Faqs client:visible faqs={i18n.DETAIL_PAGE.REGULAR_SNORKELING.FAQS.FAQS} />
+        </div>  
+    </BlockContainer>
+    <!-- More Activities -->
+    <MoreActivities />
+    <!-- Form Bokun -->
+    <div class="sticky bottom-5 max-w-4xl mx-auto z-10" id="bookingWidget">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-2 sm:gap-4 bg-black/70 text-white backdrop-blur-xs px-2 pb-2 pt-3 md:px-6 md:py-2 rounded-xl mx-4 transition-all duration-300" id="bookingContent">
+            <div>
+                <button
+                    id="minimizeBtn"
+                    class="absolute top-0 right-1 p-1 hover:bg-white/20 rounded-full cursor-pointer transition-colors"
+                    aria-label="Minimize booking widget"
+                >
+                    <BtnNext class="size-5 stroke-3 rotate-90 text-white" />
+                </button>
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center -space-x-4">
+                        <img
+                            class="h-18 w-13 sm:size-18 rounded-lg border-2 border-white object-cover shadow -rotate-6"
+                            height={50}
+                            width={50}
+                            src={PMAereal.src}
+                            alt=""
+                        />
+                        <img
+                            class="h-18 w-13 sm:size-18 rounded-lg border-2 border-white object-cover shadow rotate-3"
+                            height={50}
+                            width={50}
+                            src={CoverSA.src}
+                            alt=""
+                        />
+                    </div>
+                    <div class="pl-3 pt-2">
+                        <p class="font-semibold text-xs sm:text-lg w-fit">{i18n.DETAIL_PAGE.REGULAR_SNORKELING.HERO.TITLE}</p>
+                        <div class="flex items-center my-1">
+                            <div class="flex items-center gap-1">
+                                <Star class="size-4 text-amber-500"/> <span class="text-xs sm:text-sm font-semibold">{countStars}</span>
+                            </div>
+                            <p class="text-xs sm:text-sm ml-2">({reviewsCount} {i18n.ACCESSIBILITY.REVIEWS})</p>
+                        </div>
+                        <p class="font-semibold text-xs sm:text-lg"><span class="text-sm">{i18n.ACCESSIBILITY.PRICE_FROM}</span> ${priceFrom.toFixed(2)} USD</p>
+                    </div>
+                </div>
+            </div>
+            <BtnModalBokun  
+                client:visible
+                data={dataForm}
+            />
+        </div>
+        <button
+            id="expandBtn"
+            class="cursor-pointer hidden fixed z-5000 bottom-15 right-5 bg-linear-to-br from-sky-800 via-cyan-400 to-cyan-700 text-white hover:scale-105 rounded-full p-5 shadow-lg transition-all duration-300"
+            aria-label="Expand booking widget"
+        >
+            <Ticket class="size-8 stroke-2" />
+        </button>
+    </div>
+</BaseLayout>
+
+<script is:inline>
+    const bookingContent = document.getElementById('bookingContent');
+    const minimizeBtn = document.getElementById('minimizeBtn');
+    const expandBtn = document.getElementById('expandBtn');
+
+    minimizeBtn?.addEventListener('click', () => {
+        bookingContent.classList.add('hidden');
+        expandBtn?.classList.remove('hidden');
+    });
+
+    expandBtn?.addEventListener('click', () => {
+        bookingContent.classList.remove('hidden');
+        expandBtn?.classList.add('hidden');
+    });
+</script>

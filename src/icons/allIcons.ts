@@ -6,15 +6,18 @@ import TripadvisorBOTB from "./awards/tripadvisor-tbotb.svg";
 import NatGeoTraveller from "./awards/natgeo-traveller-black.svg";
 import WorldTravelAwards from "./awards/world-travel-awards.svg";
 // Brands
-import PrivateSnorkeling from "./brands/private-snorkeling-experience.svg";
+import PrivateSnorkeling from "./brands/snorkeling-private.svg";
 import SnorkelingAdventure from "./brands/snorkeling-adventure.svg";
 // Icons
 import BranX from "./brand-x.svg";
 import BtnPrev from "./chevron-left.svg";
 import BtnNext from "./chevron-right.svg";
+import Bus from "./bus.svg";
 import Cash from "./cash.svg";
+import CalendarTime from "./calendar-time.svg";
 import Check from "./check.svg";
 import Close from "./close.svg";
+import Clock from "./clock.svg";
 import Coral from "./coral.svg";
 import Exclamation from "./exclamation-mark.svg";
 import ExternalLink from "./external-link.svg";
@@ -34,9 +37,11 @@ import ScubaMask from "./scuba-mask.svg";
 import Share from "./share.svg";
 import Star from "./star.svg";
 import Swimwear from "./swimwear.svg";
+import Ticket from "./ticket.svg";
 import Tiktok from "./tiktok.svg";
 import Towel from "./towel.svg";
 import Tripadvisor from "./tripadvisor.svg";
+import UserUp from "./user-up.svg";
 import World from "./world.svg";
 import Youtube from "./youtube.svg";
 import WhatsApp from "./whatsapp.svg";
@@ -52,9 +57,12 @@ export {
     BranX,
     BtnPrev,
     BtnNext,
+    Bus,
     Cash,
+    CalendarTime,
     Check,
     Close,
+    Clock,
     Coral,
     Exclamation,
     ExternalLink,
@@ -74,9 +82,11 @@ export {
     Share,
     Star,
     Swimwear,
+    Ticket,
     Tiktok,
     Towel,
     Tripadvisor,
+    UserUp,
     World,
     Youtube,
     WhatsApp
