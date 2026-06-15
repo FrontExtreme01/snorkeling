@@ -6,10 +6,10 @@ import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  site: "https://snorkeling.cloudflare.app",
+  site: "https://snorkeling.frontend-extreme.workers.dev",
   trailingSlash: 'always',
   adapter: cloudflare(),
-  output: 'static',
+  output: 'server',
   integrations: [
     react(),
     sitemap({

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /thanks
 
-Sitemap: https://snorkeling.cloudflare.app/sitemap-index.xml
+Sitemap: https://snorkeling.frontend-extreme.workers.dev/sitemap-index.xml
