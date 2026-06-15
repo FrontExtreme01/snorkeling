@@ -3,7 +3,6 @@ export const prerender = false;
 
 import { getPostInfo } from "@/services/wp";
 import { formatDate, replaceHtmlEntities } from "@/utils/functions";
-import { Schema } from "astro-seo-schema";
 import { siteName } from "@/utils/dataGlobal";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BlockContainer from "@/components/global/BlockContainer.astro";
@@ -35,95 +34,6 @@ const seoMetaData = {
 ---
 
 <BaseLayout seo={seoMetaData} offI18n={true}>
-    <!-- Schemas -->
-    <Schema
-        slot="schema-jsonld"
-        item={{
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: title,
-            image: featuredImage,
-            datePublished: new Date(date).toISOString(),
-            dateModified: new Date(date).toISOString(),
-            description: seoDescription,
-            publisher: {
-                "@type": "Organization",
-                "@id": siteURL.origin,
-                name: siteName,
-                logo: {
-                    "@type": "ImageObject",
-                    url: `${siteURL.origin}/assets/img/logos/logo-snorkel.png`,
-                },
-            },
-            author: {
-                "@type": "Organization",
-                name: siteName,
-                url: siteURL.origin,
-            },
-        }}
-    />
-    <Schema
-        slot="schema-jsonld"
-        item={{
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-                {
-                    "@type": "ListItem",
-                    position: 1,
-                    name: "Home",
-                    item: siteURL.origin,
-                },
-                {
-                    "@type": "ListItem",
-                    position: 2,
-                    name: "Blog",
-                    item: `${siteURL.origin}/blog/`,
-                },
-                {
-                    "@type": "ListItem",
-                    position: 3,
-                    name: title,
-                    item: siteURL.href,
-                },
-            ],
-        }}
-    />
-    <Schema
-        slot="schema-jsonld"
-        item={{
-            "@context": "https://schema.org",
-            "@type": "Article",
-            mainEntityOfPage: {
-                "@type": "WebPage",
-                "@id": siteURL.href,
-            },
-            headline: title,
-            image: {
-                "@type": "ImageObject",
-                url: featuredImage,
-                width: "1000",
-                height: "563",
-            },
-            author: {
-                "@type": "Organization",
-                name: siteName,
-                url: siteURL.origin,
-            },
-            publisher: {
-                "@type": "Organization",
-                name: siteName,
-                logo: {
-                    "@type": "ImageObject",
-                    url: `${siteURL.origin}/assets/img/logos/logo-snorkel.png`,
-                    width: "546",
-                    height: "546",
-                },
-            },
-            datePublished: new Date(date).toISOString(),
-            dateModified: new Date(date).toISOString(),
-        }}
-    />
     <!-- Article Content -->
     <BlockContainer>
         <div class="max-w-4xl mx-auto my-20 mb-10">

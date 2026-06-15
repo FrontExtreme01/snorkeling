@@ -1,5 +1,5 @@
 ---
-import { Schema } from "astro-seo-schema";
+export const prerender = true;
 import { getI18N } from "@/i18n";
 import { getSlides } from "@public/img/hero-carousel/allSlides";
 import { getLangFromUrl } from "@/i18n/utils";
@@ -27,23 +27,6 @@ const seoMetaData = {
 ---
 
 <BaseLayout seo={seoMetaData}>
-    {i18n.HOME_PAGE.FAQS.FAQS && (
-        <Schema
-            slot="schema-jsonld"
-            item={{
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                mainEntity: i18n.HOME_PAGE.FAQS.FAQS.map((faq) => ({
-                    "@type": "Question",
-                    name: faq.question,
-                    acceptedAnswer: {
-                        "@type": "Answer",
-                        text: faq.answer,
-                    },
-                })),
-            }}
-        />
-    )}
     <SlideDesktop slides={slides.desktop} />
     <SlideMobile slides={slides.mobile} />
     <IntroHome />

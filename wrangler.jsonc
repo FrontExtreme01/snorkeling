@@ -1,13 +1,17 @@
 {
-	"compatibility_date": "2026-05-19",
-	"compatibility_flags": ["global_fetch_strictly_public"],
-	"name": "snorkeling",
-	"main": "@astrojs/cloudflare/entrypoints/server",
-	"assets": {
-		"directory": "./dist",
-		"binding": "ASSETS"
-	},
-	"observability": {
-		"enabled": true
-	}
+    "name": "snorkeling",
+    "main": "./dist/_worker.js/index.js",
+    // Update to today's date
+    // Set this to today's date
+    "compatibility_date": "2026-06-15",
+    "compatibility_flags": [
+        "nodejs_compat"
+    ],
+    "assets": {
+        "binding": "ASSETS",
+        "directory": "./dist"
+    },
+    "observability": {
+        "enabled": true
+    }
 }

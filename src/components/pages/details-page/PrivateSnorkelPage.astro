@@ -13,7 +13,6 @@ import GalleryDetail from "@/components/sections/GalleryDetail.astro";
 import AccordionComponent from "@/components/sections/AccordionComponent";
 import TagH3 from "@/components/global/TagH3.astro";
 import HeroVideo from "@/components/sections/HeroVideo.astro";
-import { Schema } from "astro-seo-schema";
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
@@ -49,91 +48,6 @@ const seoMetaData = {
 ---
 
 <BaseLayout seo={seoMetaData}>
-    {i18n.DETAIL_PAGE.PRIVATE_SNORKELING.FAQS.FAQS && (
-    <Schema
-            slot="schema-jsonld"
-            item={{
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                mainEntity: i18n.DETAIL_PAGE.PRIVATE_SNORKELING.FAQS.FAQS.map((faq) => ({
-                    "@type": "Question",
-                    name: faq.question,
-                    acceptedAnswer: {
-                        "@type": "Answer",
-                        text: faq.answer,
-                    },
-                })),
-            }}
-        />
-    )}
-    <Schema
-        slot="schema-jsonld"
-        item={{
-            "@context": "https://schema.org",
-            "@type": "TouristAttraction",
-            name: i18n.DETAIL_PAGE.PRIVATE_SNORKELING.HERO.TITLE,
-            description: i18n.SEO.DETAIL_PAGE.PRIVATE_SNORKELING.DESCRIPTION,
-            image: `${siteWebURL.origin}${PrivateBoatSnorkel.src}`,
-            url: siteWebURL.href,
-            availableLanguage: [
-                {
-                        "@type": "Language",
-                        "name": "Spanish"
-                },
-                {
-                        "@type": "Language",
-                        "name": "English"
-                }
-            ]
-        }}
-    />
-    <Schema
-        slot="schema-jsonld"
-        item={{
-            "@context": "https://schema.org",
-            "@type": "Product",
-            name: i18n.DETAIL_PAGE.PRIVATE_SNORKELING.HERO.TITLE,
-            description: i18n.SEO.DETAIL_PAGE.PRIVATE_SNORKELING.DESCRIPTION,
-            image: `${siteWebURL.origin}${PrivateBoatSnorkel.src}`,
-            offers: {
-                "@type": "Offer",
-                price: priceFrom,
-                priceCurrency: "USD",
-                availability: "InStock",
-                url: siteWebURL.href,
-            },
-            brand: {
-                "@type": "Brand",
-                name: "Snorkeling Adventure",
-            },
-            aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: countStars,
-                reviewCount: reviewsNumber,
-            } 
-        }}
-    />
-    <Schema
-        slot="schema-jsonld"
-        item={{
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-                {
-                    "@type": "ListItem",
-                    position: 1,
-                    name: "Home",
-                    item: siteWebURL.origin,
-                },
-                {
-                    "@type": "ListItem",
-                    position: 2,
-                    name: i18n.DETAIL_PAGE.PRIVATE_SNORKELING.HERO.TITLE,
-                    item: siteWebURL.href,
-                }
-            ],
-        }}
-    />
     <!-- Hero -->
     <HeroVideo
         title={i18n.DETAIL_PAGE.PRIVATE_SNORKELING.HERO.TITLE}
