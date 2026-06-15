@@ -8,8 +8,8 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: "https://snorkeling.frontend-extreme.workers.dev",
   trailingSlash: 'always',
-  adapter: cloudflare(),
   output: 'server',
+  adapter: cloudflare(),
   integrations: [
     react(),
     sitemap({
