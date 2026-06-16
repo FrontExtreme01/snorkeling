@@ -1,8 +1,0 @@
-name = "snorkeling"
-
-compatibility_date = "2026-06-15"
-
-compatibility_flags = ["nodejs_compat"]
-
-[observability]
-enabled = true
