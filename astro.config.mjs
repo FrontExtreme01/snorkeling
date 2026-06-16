@@ -23,7 +23,6 @@ export default defineConfig({
       filter: (page) =>
         !page.includes('/thanks')
     })],
-
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es'],
@@ -31,7 +30,6 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
-
   vite: {
     plugins: [tailwindcss()]
   },
